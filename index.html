@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Kai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #00f2ff;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #00f2ff;
+            color: #000;
+            cursor: pointer;
+        }
+        .resposta {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+  <link rel="icon" href="https://emoji.gg/assets/emoji/5273-blurple-bot.png">
+<body>
+    <h1>Kai 🤖</h1>
+    <form id="chatForm">
+        <input type="text" id="pergunta" placeholder="Digite sua pergunta...">
+        <button type="submit">Enviar</button>
+    </form>
+    <div class="resposta" id="resposta"></div>
+
+    <script>
+        document.getElementById('chatForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const pergunta = document.getElementById('pergunta').value;
+
+            const response = await fetch('/responder', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pergunta })
+            });
+
+            const data = await response.json();
+            document.getElementById('resposta').innerText = data.resposta;
+        });
+    </script>
+</body>
+</html>
