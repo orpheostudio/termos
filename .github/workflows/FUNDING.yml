@@ -1,0 +1,28 @@
+<section class="sponsors" style="padding: 3rem 1rem; background: linear-gradient(135deg, #1c1c1c, #2c2c2c); color: white; text-align: center; font-family: 'Segoe UI', sans-serif;">
+  <div style="max-width: 900px; margin: auto;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">🚀 Torne-se um Patrocinador do <span style="color: #ff4c98;">Mundo Otaku</span></h2>
+    <p style="font-size: 1.1rem; margin-bottom: 2rem;">Apareça para milhares de fãs apaixonados por cultura japonesa. Sua marca pode estar aqui!</p>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-bottom: 2.5rem;">
+      <div style="background: #333; padding: 1.5rem; border-radius: 1rem; flex: 1; min-width: 250px;">
+        <img src="https://img.icons8.com/fluency/48/advertising.png" alt="Visibilidade" style="margin-bottom: 1rem;">
+        <h3 style="font-size: 1.3rem;">Visibilidade Direcionada</h3>
+        <p style="font-size: 0.95rem;">Alcance direto com o público otaku, geek e gamer.</p>
+      </div>
+      <div style="background: #333; padding: 1.5rem; border-radius: 1rem; flex: 1; min-width: 250px;">
+        <img src="https://img.icons8.com/fluency/48/gift--v1.png" alt="Parcerias" style="margin-bottom: 1rem;">
+        <h3 style="font-size: 1.3rem;">Parcerias Criativas</h3>
+        <p style="font-size: 0.95rem;">Criamos campanhas que geram impacto e engajamento real.</p>
+      </div>
+      <div style="background: #333; padding: 1.5rem; border-radius: 1rem; flex: 1; min-width: 250px;">
+        <img src="https://img.icons8.com/fluency/48/money.png" alt="Resultados" style="margin-bottom: 1rem;">
+        <h3 style="font-size: 1.3rem;">Retorno Real</h3>
+        <p style="font-size: 0.95rem;">Estatísticas, relatórios e feedback direto da comunidade.</p>
+      </div>
+    </div>
+
+    <a href="mailto:contato@seusite.com" style="background: #ff4c98; padding: 0.9rem 2rem; border-radius: 999px; color: white; font-weight: bold; text-decoration: none; font-size: 1.1rem; transition: 0.3s;">
+      📩 Fale com a gente agora!
+    </a>
+  </div>
+</section>
