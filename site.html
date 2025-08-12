@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAI WebApp</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Swiper para carrosséis -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #121212;
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    canvas#bg3d {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      transition: 0.3s;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: #03a9f4;
+      text-shadow: 0 0 12px #03a9f4;
+    }
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #03a9f4;
+      text-shadow: 0 0 10px #03a9f4;
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-content {
+      max-width: 700px;
+      animation: fadeIn 1.5s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    .hero h2 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px #03a9f4;
+    }
+    .hero p {
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      color: #bbdefb;
+    }
+    .hero a {
+      background: #03a9f4;
+      color: #fff;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 5px 20px rgba(3, 169, 244, 0.7);
+      transition: 0.3s;
+    }
+    .hero a:hover {
+      background: #0288d1;
+      box-shadow: 0 7px 25px rgba(2, 136, 209, 0.9);
+    }
+
+    /* Sections */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px;
+    }
+    section {
+      margin-bottom: 100px;
+    }
+    section h2 {
+      font-size: 2.5rem;
+      color: #03a9f4;
+      text-align: center;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px #03a9f4;
+    }
+
+    /* Grid Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: 0.4s;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 0 30px rgba(3, 169, 244, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: #0d0d0d;
+      text-align: center;
+      padding: 40px 20px;
+      color: #bbdefb;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #03a9f4;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: 0.8s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg3d"></canvas>
+
+  <header id="header">
+    <h1>KAI WebApp</h1>
+    <nav>
+      <a href="#livros">Catálogo</a>
+      <a href="#contato">Seja Membro</a>
+      <a href="#comunidade">Redes Sociais</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Bem-vindo ao KAI WebApp</h2>
+      <p>A plataforma interativa e social para todos os fãs de anime.</p>
+      <a href="#livros">Explorar</a>
+    </div>
+  </section>
+
+  <main>
+    <section class="book-catalog" id="livros">
+      <h2>Catálogo de Livros</h2>
+      <div class="book-grid">
+
+        <!-- Livro 1 -->
+        <div class="book-card">
+          <img src="https://cdn.discordapp.com/attachments/1295254780528033892/1401211150326305000/file_000000003f2062308ab670a934d73fe6.png?ex=688f7313&is=688e2193&hm=4ac55364ef34a3079ab97a2e394dc7cae4887d6a7a1884deafc0eb8fe9ca1af4&" alt="Capa de Abunai Aisuru" class="book-cover">
+          <div class="book-info">
+            <h3>Abunai Aisuru</h3>
+            <p>Em um Japão onde casamentos são impostos pelo governo, Naoya desafia o sistema em nome do amor.</p>
+            <span class="tags">🎭 Drama • 💔 Romance • 🏛️ Distopia</span>
+            <a href="https://a.co/d/6v1y1xu" class="buy-button" target="_blank">Comprar na Amazon</a>
+          </div>
+        </div>
+
+        <!-- Livro 2 -->
+        <div class="book-card">
+          <img src="https://cdn.discordapp.com/attachments/1295254780528033892/1401210331073871963/file_00000000236861f98bbecccfd62f7307.png?ex=688f7250&is=688e20d0&hm=4f9439400af1da4cd27720de6ce29d60b137ac4c9ef97d7b46274aa738f409ac&" alt="Capa de Kizuite Kudassai" class="book-cover">
+          <div class="book-info">
+            <h3>Kizuite Kudassai</h3>
+            <p>Entre silêncios e cicatrizes, um amor delicado floresce sem pedir permissão.</p>
+            <span class="tags">🌸 Slice of Life • 💕 Romance • 😭 Emoção</span>
+            <a href="https://a.co/d/bTmnXcr" class="buy-button" target="_blank">Comprar na
