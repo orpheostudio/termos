@@ -1,78 +1,66 @@
-# This workflow will build and push a node.js application to an Azure Web App when a commit is pushed to your default branch.
-#
-# This workflow assumes you have already created the target Azure App Service web app.
-# For instructions see https://docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs?tabs=linux&pivots=development-environment-cli
-#
-# To configure this workflow:
-#
-# 1. Download the Publish Profile for your Azure Web App. You can download this file from the Overview page of your Web App in the Azure Portal.
-#    For more information: https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel#generate-deployment-credentials
-#
-# 2. Create a secret in your repository named AZURE_WEBAPP_PUBLISH_PROFILE, paste the publish profile contents as the value of the secret.
-#    For instructions on obtaining the publish profile see: https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
-#
-# 3. Change the value for the AZURE_WEBAPP_NAME. Optionally, change the AZURE_WEBAPP_PACKAGE_PATH and NODE_VERSION environment variables below.
-#
-# For more information on GitHub Actions for Azure: https://github.com/Azure/Actions
-# For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
+# Este workflow irá construir e enviar uma aplicação Node.js para o Azure Web App
+# quando um commit for enviado para o branch padrão.
+
+# Para instruções de como configurar esse workflow, veja:
+# https://docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs?tabs=linux&pivots=development-environment-cli
 
 on:
   push:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches: [ "main" ]     # O workflow será executado quando um commit for enviado para o branch 'main'.
+  workflow_dispatch:           # Permite disparar o workflow manualmente a partir da interface do GitHub.
 
 env:
-  AZURE_WEBAPP_NAME: your-app-name    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '20.x'                # set this to the node version to use
+  AZURE_WEBAPP_NAME: kai-webapp       # Nome do seu Azure Web App, substitua 'kai-webapp' pelo nome real.
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # Caminho do projeto, '.' indica que o app está na raiz do repositório.
+  NODE_VERSION: '20.x'               # Versão do Node.js a ser utilizada para a aplicação.
 
 permissions:
-  contents: read
+  contents: read      # Permissão padrão para ler o conteúdo do repositório.
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Ambiente para rodar o job, aqui está configurado para Ubuntu.
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout do código
+      uses: actions/checkout@v4   # Este passo faz o checkout do repositório.
 
-    - name: Set up Node.js
+    - name: Configurar Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
+        node-version: ${{ env.NODE_VERSION }}  # Configura a versão do Node.js como especificado na variável de ambiente.
+        cache: 'npm'                         # Configura o cache para módulos npm, acelerando builds futuros.
 
-    - name: npm install, build, and test
+    - name: Instalar dependências, construir e testar
       run: |
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+        npm install                    # Instala as dependências do projeto.
+        npm run build --if-present      # Executa a construção do projeto, caso exista um script 'build' no package.json.
+        npm run test --if-present       # Executa os testes, caso exista um script 'test' no package.json.
 
-    - name: Upload artifact for deployment job
+    - name: Subir o artefato para o job de deploy
       uses: actions/upload-artifact@v4
       with:
-        name: node-app
-        path: .
+        name: node-app                    # Nome do artefato que será usado no job de deploy.
+        path: .                            # Caminho dos arquivos do projeto.
 
   deploy:
     permissions:
-      contents: none
-    runs-on: ubuntu-latest
-    needs: build
+      contents: none   # Não são necessárias permissões para este job, apenas para o deploy.
+    runs-on: ubuntu-latest  # Ambiente para o job de deploy, também Ubuntu.
+    needs: build    # O job de deploy só será executado após o sucesso do job de build.
     environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      name: 'Production'  # Nome do ambiente para o deploy (você pode usar 'Development' ou 'Production').
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}  # URL do aplicativo após o deploy.
 
     steps:
-    - name: Download artifact from build job
+    - name: Baixar artefato do job de build
       uses: actions/download-artifact@v4
       with:
-        name: node-app
+        name: node-app  # Baixa o artefato que foi gerado no job de build.
 
-    - name: 'Deploy to Azure WebApp'
+    - name: Deploy para o Azure WebApp
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}              # Nome do seu Azure Web App, substituído por 'kai-webapp'.
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # Perfil de publicação do Azure, armazenado como segredo.
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}      # Caminho para os arquivos da aplicação (geralmente a raiz).
