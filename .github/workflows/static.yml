@@ -1,0 +1,47 @@
+# Workflow para deploy de conteúdo para o Azure Web App (Kai WebApp)
+name: Deploy to Azure WebApp
+
+on:
+  # Aciona o workflow sempre que houver um push para a branch principal
+  push:
+    branches:
+      - main
+  # Também pode ser disparado manualmente
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "azure-webapp-deploy"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (caso seja uma aplicação Node.js)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16.x'  # Modifique conforme a versão do Node.js do seu projeto
+
+      - name: Install dependencies (caso precise)
+        run: |
+          npm install  # Instala dependências se necessário
+
+      - name: Build the app (se necessário)
+        run: |
+          npm run build  # Apenas se sua aplicação precisar ser compilada antes do deploy
+
+      - name: Deploy to Azure WebApp
+        uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
+        with:
+          app-name: kai-webapp   # Substitua pelo nome do seu Azure WebApp
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # O segredo que você configurou
+          package: '.'  # Diretório do conteúdo estático ou da aplicação para fazer o deploy
