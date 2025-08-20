@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="128" viewBox="0 0 512 128">
+  <!-- Fundo circular degradê -->
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4d9fff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="64" fill="url(#grad)"/>
+
+  <!-- Triângulo representando chat/conexão -->
+  <polygon points="64,20 100,108 28,108" fill="white"/>
+
+  <!-- Pontinhos dentro do triângulo -->
+  <circle cx="64" cy="48" r="6" fill="#ff6b6b"/>
+  <circle cx="64" cy="64" r="6" fill="#ff6b6b"/>
+  <circle cx="64" cy="80" r="6" fill="#ff6b6b"/>
+
+  <!-- Texto Athena -->
+  <text x="150" y="85" fill="#4d4d4d" font-family="Arial, sans-serif" font-size="64" font-weight="bold">Athena</text>
+</svg>
