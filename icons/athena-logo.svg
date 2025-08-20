@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="128" viewBox="0 0 512 128">
+  <!-- Mão estilizada -->
+  <path d="M20 90 C35 60, 65 60, 80 90 L80 100 Q60 110, 40 100 Z" fill="#6b47dc"/>
+  <circle cx="65" cy="65" r="8" fill="#fbfafdff"/>
+  <circle cx="50" cy="70" r="6" fill="#f9f9faff"/>
+
+  <!-- Bolha de chat -->
+  <path d="M100 35 Q145 10, 190 35 Q210 60, 160 85 Q115 85, 100 60 Z" fill="#6b47dc" stroke="#5a38b8" stroke-width="2"/>
+  <circle cx="130" cy="55" r="5" fill="white"/>
+  <circle cx="150" cy="55" r="5" fill="white"/>
+  <circle cx="170" cy="55" r="5" fill="white"/>
+
+  <!-- Texto Athena -->
+  <text x="210" y="70" fill="#d106faff" font-family="Arial, sans-serif" font-size="48" font-weight="bold">Athena</text>
+</svg>
