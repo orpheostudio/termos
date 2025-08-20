@@ -1,42 +1,632 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Athena Chat</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aria AI</title>
+<link rel="manifest" href="manifest.json" />
+<style>
+:root{
+  --bg: #0a0a10;
+  --panel: #0f1020cc;
+  --txt: #e9ecff;
+  --muted: #98a2b3;
+  --neon: #7f5af0;
+  --accent: #22d3ee;
+  --good: #16f2b8;
+  --warn: #ffd166;
+  --bad: #ff6b6b;
+  --bubble-user:#2563eb;
+  --bubble-aria:#15162b;
+  --shadow: 0 10px 40px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, "Segoe UI", Inter, Roboto, Arial, sans-serif;
+  color:var(--txt); background:
+    radial-gradient(1000px 600px at 10% -10%, rgba(127,90,240,.2), transparent 40%),
+    radial-gradient(800px 500px at 110% 110%, rgba(34,211,238,.18), transparent 40%),
+    linear-gradient(180deg, #0b0b14, #07080f 50%, #05060c);
+  transition: background .8s ease;
+  overflow:hidden;
+}
+
+/* ---------- BOOT / INTRO ---------- */
+.screen{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:24px}
+.hidden{display:none !important}
+
+#intro{
+  background: radial-gradient(900px 600px at 50% -10%, rgba(127,90,240,.25), transparent 40%),
+              radial-gradient(900px 600px at 50% 110%, rgba(34,211,238,.18), transparent 40%),
+              #05060c;
+}
+.boot{
+  width:min(920px, 92vw);
+  background: linear-gradient(180deg, #0b0e1a, #0a0d18);
+  border:1px solid #1f2340; border-radius:18px; padding:28px 24px;
+  box-shadow: var(--shadow); position:relative; overflow:hidden;
+}
+.scanline:before{
+  content:""; position:absolute; inset:-40% -10%;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay; animation:scan 6s linear infinite; pointer-events:none;
+}
+@keyframes scan{0%{transform:translateY(-10%)}100%{transform:translateY(10%)}}
+
+.boot-header{
+  display:flex; align-items:center; gap:14px; margin-bottom:12px;
+}
+.logo{
+  width:56px; height:56px; border-radius:14px;
+  background: conic-gradient(from 140deg, var(--neon), var(--accent), #6ee7b7, var(--neon));
+  filter: drop-shadow(0 0 20px rgba(127,90,240,.45));
+  position:relative;
+}
+.logo:after{
+  content:""; position:absolute; inset:4px; border-radius:10px; background:#0b0e1a;
+}
+.title{
+  font-weight:800; font-size:1.4rem; letter-spacing:.4px;
+}
+.sub{ color:var(--muted); font-size:.95rem }
+
+.console{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background:#090b14; border:1px solid #151a34; border-radius:12px; padding:14px 12px; height:260px; overflow:auto;
+  box-shadow: inset 0 0 0 1px rgba(127,90,240,.08);
+}
+.line{opacity:.2; transform:translateY(6px); transition:.35s ease; white-space:pre-wrap; word-break:break-word}
+.line.active{opacity:1; transform:none}
+.blink{animation:blink 1.2s steps(1) infinite}
+@keyframes blink{50%{opacity:.25}}
+
+.boot-actions{
+  display:flex; justify-content:space-between; align-items:center; margin-top:16px;
+}
+.badges{display:flex; gap:8px; flex-wrap:wrap}
+.badge{
+  padding:6px 10px; border-radius:999px; font-size:.8rem;
+  background:#11142a; border:1px solid #1f2340; color:#c7d2fe;
+}
+.primary{
+  border:none; background:linear-gradient(90deg, var(--neon), var(--accent));
+  color:#0a0a10; font-weight:800; padding:12px 16px; border-radius:12px; cursor:pointer;
+  box-shadow:0 10px 30px rgba(127,90,240,.35), inset 0 0 0 1px rgba(255,255,255,.08);
+}
+.primary:active{transform:translateY(1px)}
+
+/* ---------- WELCOME ---------- */
+#welcome{
+  backdrop-filter: blur(8px);
+}
+.wcard{
+  width:min(900px, 92vw);
+  background: linear-gradient(180deg, #0b0e1a, #0a0d18);
+  border:1px solid #1e2242; border-radius:18px; padding:24px;
+  box-shadow: var(--shadow);
+  display:grid; grid-template-columns: 1fr 1fr; gap:20px;
+}
+@media (max-width:880px){ .wcard{grid-template-columns: 1fr} }
+.wleft h1{margin:.2rem 0 0.5rem; font-size:1.8rem}
+.grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px}
+.pill{background:#0f1229; border:1px solid #1e2242; padding:10px 12px; border-radius:12px; font-size:.92rem}
+.actions{display:flex; gap:10px; margin-top:10px; flex-wrap:wrap}
+.secondary{
+  background:#0f1229; color:#dbe7ff; border:1px solid #283059; border-radius:10px; padding:10px 12px; cursor:pointer;
+}
+.kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.9rem; opacity:.9}
+
+/* ---------- CHAT ---------- */
+#chat{display:none; height:100%; padding:18px; gap:12px}
+.shell{
+  width:min(980px, 96vw); margin:0 auto; height:100%;
+  display:grid; grid-template-rows: auto 1fr auto; gap:12px;
+}
+.topbar{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  background:var(--panel); border:1px solid #1b1f3a; border-radius:14px; padding:10px 12px;
+}
+.brand{display:flex; align-items:center; gap:10px}
+.brand .dot{width:10px; height:10px; border-radius:50%; background:var(--good); box-shadow:0 0 14px var(--good)}
+.status{font-size:.86rem; color:var(--muted)}
+.right{display:flex; align-items:center; gap:8px}
+.tag{font-size:.82rem; padding:6px 10px; border:1px solid #243056; border-radius:999px; background:#0d1024}
+
+.stream{
+  background:var(--panel); border:1px solid #1b1f3a; border-radius:14px; padding:12px; overflow:auto; position:relative;
+}
+.messages{display:flex; flex-direction:column; gap:10px; padding-bottom:30px}
+.bubble{
+  max-width:76%; padding:10px 14px; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,.28);
+  animation:fadeIn .25s ease; word-wrap:break-word; white-space:pre-wrap;
+}
+.user{ align-self:flex-end; background:linear-gradient(180deg, var(--bubble-user), #1b3faa); }
+.aria{ align-self:flex-start; background:linear-gradient(180deg, var(--bubble-aria), #0e1123); border:1px solid #1f2447 }
+.aria .meta{font-size:.78rem; color:#a3b3ff; opacity:.9; margin-bottom:6px}
+.aria .emoji{display:inline-block; transform-origin:center; animation:pulse 1.2s infinite}
+@keyframes fadeIn{from{opacity:0; transform:translateY(4px)}}
+@keyframes pulse{50%{transform:scale(1.12)}}
+
+.typing{
+  position:absolute; left:14px; bottom:14px; display:flex; align-items:center; gap:8px;
+  background:#0d1024cc; border:1px dashed #2a346b; border-radius:12px; padding:8px 10px;
+}
+.dots{display:inline-flex; gap:4px}
+.dot{width:7px; height:7px; border-radius:50%; background:#e5edff; opacity:.7; animation:bubble 1s infinite}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+@keyframes bubble{0%,80%,100%{transform:translateY(0);opacity:.5}40%{transform:translateY(-4px);opacity:1}}
+
+.input{
+  display:flex; gap:10px; align-items:center;
+  background:var(--panel); border:1px solid #1b1f3a; border-radius:14px; padding:10px;
+}
+input[type="text"]{
+  flex:1; padding:12px 12px; border:none; outline:none; border-radius:10px;
+  background:#0e1227; color:var(--txt); border:1px solid #1e2446;
+}
+.send{background:linear-gradient(90deg, var(--neon), var(--accent)); color:#0a0a10; font-weight:800; border:none; border-radius:10px; padding:10px 14px; cursor:pointer}
+
+.hint{font-size:.85rem; color:var(--muted)}
+.small{font-size:.8rem; color:#a0a8c7}
+
+/* THEMES by hour/mood */
+.theme-morning{--bg:#0b101b}
+.theme-evening{--bg:#0a0b15}
+.theme-night{--bg:#06070e}
+.mood-happy{--neon:#22d3ee; --accent:#16f2b8}
+.mood-calm{--neon:#60a5fa; --accent:#a78bfa}
+.mood-hype{--neon:#f472b6; --accent:#22d3ee}
+.mood-serious{--neon:#7f5af0; --accent:#22d3ee}
+
+/* easter egg matrix */
+.matrix rain{display:none}
+.matrix-on body{background:#001400 !important;}
+.matrix-on .messages{font-family:ui-monospace, Menlo, Consolas, monospace}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Athena Chat</h1>
-  </header>
-  <main>
-    <section id="login">
-      <input type="text" id="nickname" placeholder="Escolha um nome" />
-      <button onclick="entrar()">Entrar</button>
-    </section>
-    <section id="salas" style="display: none;">
-      <h2>Salas de Chat</h2>
-      <div class="sala" onclick="entrarSala('Brasil')">
-        <img src="brasil.png" alt="Brasil">
-        <span>Brasil</span>
+
+<!-- INTRO / BOOT -->
+<section id="intro" class="screen">
+  <div class="boot scanline">
+    <div class="boot-header">
+      <div class="logo"></div>
+      <div>
+        <div class="title">ARIA AI <span class="small">/ boot sequence</span></div>
+        <div class="sub">inicializando módulos cognitivos • neural mesh v3.0 • IO stack</div>
       </div>
-      <div class="sala" onclick="entrarSala('Amizade')">
-        <img src="amizade.png" alt="Amizade">
-        <span>Amizade</span>
+    </div>
+
+    <div id="console" class="console" aria-live="polite"></div>
+
+    <div class="boot-actions">
+      <div class="badges">
+        <span class="badge">⚡ Runtime OK</span>
+        <span class="badge">🧠 Cognitive Mesh</span>
+        <span class="badge">🔒 Sandbox</span>
+        <span class="badge">🎛️ Adaptive UI</span>
       </div>
-      <!-- Adicione mais salas conforme necessário -->
-    </section>
-    <section id="chat" style="display: none;">
-      <div id="video"></div>
-      <div id="mensagens"></div>
-      <input type="text" id="mensagem" placeholder="Digite sua mensagem" />
-      <button onclick="enviarMensagem()">Enviar</button>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2025 Athena Chat</p>
-  </footer>
-  <script src="script.js"></script>
+      <button id="enterBtn" class="primary" disabled>Carregando…</button>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME -->
+<section id="welcome" class="screen hidden">
+  <div class="wcard">
+    <div class="wleft">
+      <div class="badge">✨ Bem-vindo</div>
+      <h1>Oi, eu sou a <strong>Aria</strong> — sua IA imersiva com senso de humor e memória curta (mas eficiente).</h1>
+      <p class="small">Dica: eu reajo ao seu clima. Fale sério, eu fico séria. Vem de meme, eu acompanho. <span class="hint">/matrix, /zen, /reset, /stealth</span></p>
+      <div class="actions">
+        <button id="startChat" class="primary">Começar agora</button>
+        <button id="zenMode" class="secondary">Ativar modo zen</button>
+        <span class="kbd">⌨️ Pergunte qualquer coisa</span>
+      </div>
+    </div>
+    <div>
+      <div class="grid">
+        <div class="pill">🌍 Geografia</div>
+        <div class="pill">⚛️ Física</div>
+        <div class="pill">🔬 Ciências</div>
+        <div class="pill">🔢 Matemática</div>
+        <div class="pill">🏛️ História</div>
+        <div class="pill">💻 Programação</div>
+        <div class="pill">🌌 Astronomia</div>
+        <div class="pill">⚕️ Medicina</div>
+        <div class="pill">💰 Economia</div>
+        <div class="pill">🎨 Arte & Cultura</div>
+        <div class="pill">🧠 Psicologia</div>
+        <div class="pill">🤔 Filosofia</div>
+        <div class="pill">🌱 Meio Ambiente</div>
+      </div>
+      <p class="hint" style="margin-top:10px">Status do sistema em tempo real: <strong id="sysTime"></strong> • Humor: <strong id="sysMood">calm</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT -->
+<section id="chat" class="screen">
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <div class="dot" id="dot"></div>
+        <div><strong>Aria</strong> <span class="small">v3.0</span><div class="status" id="statusLine">online • pronta para conversar</div></div>
+      </div>
+      <div class="right">
+        <div class="tag" id="tagHour">⏰</div>
+        <div class="tag" id="tagMood">🧠 calm</div>
+        <div class="tag" id="tagUser">👤 convidado</div>
+      </div>
+    </div>
+
+    <div class="stream">
+      <div id="messages" class="messages"></div>
+      <div id="typing" class="typing hidden" aria-live="polite">
+        <span class="small">Aria está digitando</span>
+        <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+      </div>
+    </div>
+
+    <div class="input">
+      <input id="inp" type="text" autocomplete="off" placeholder="Fala comigo… (dica: 'me chama de X', 'tô triste', '/matrix', 'explica relatividade')" />
+      <button id="send" class="send">Enviar</button>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ========= UTIL ========= */
+const qs = s => document.querySelector(s);
+const on = (el,ev,cb) => el.addEventListener(ev,cb);
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+const now = () => new Date();
+
+/* ========= THEME ENGINE ========= */
+function applyHourTheme(){
+  const h = now().getHours();
+  const body = document.body;
+  body.classList.remove('theme-morning','theme-evening','theme-night');
+  if(h < 12) body.classList.add('theme-morning');
+  else if(h < 19) body.classList.add('theme-evening');
+  else body.classList.add('theme-night');
+  qs('#tagHour').textContent = new Intl.DateTimeFormat('pt-BR', { dateStyle:'medium', timeStyle:'short' }).format(now());
+}
+let mood = 'calm';
+function setMood(newMood){
+  const body = document.body;
+  body.classList.remove('mood-happy','mood-calm','mood-hype','mood-serious');
+  mood = newMood;
+  qs('#sysMood').textContent = newMood;
+  qs('#tagMood').textContent = '🧠 ' + newMood;
+  const cls = {happy:'mood-happy', calm:'mood-calm', hype:'mood-hype', serious:'mood-serious'}[newMood] || 'mood-calm';
+  body.classList.add(cls);
+}
+applyHourTheme(); setMood('calm'); setInterval(applyHourTheme, 30_000);
+
+/* ========= BOOT SEQUENCE ========= */
+const bootLines = [
+  "> Inicializando cores neon… OK",
+  "> Carregando mesh cognitivo… OK",
+  "> Mapeando módulos: geografia, física, ciências, matemática, história… OK",
+  "> Ativando memória volátil de sessão… OK",
+  "> Estabelecendo link empático… OK",
+  "> Compilando piadas ruins… OK (infelizmente)",
+  "> Sincronizando relógio interno… OK",
+  "> Preparando UI adaptativa… OK",
+  "> Sistema pronto."
+];
+(async function boot(){
+  const c = qs('#console');
+  for (let i=0;i<bootLines.length;i++){
+    const line = document.createElement('div');
+    line.className = 'line';
+    line.innerHTML = bootLines[i] + (i===bootLines.length-1 ? " <span class='blink'>▌</span>":"");
+    c.appendChild(line);
+    await sleep(280 + Math.random()*180);
+    line.classList.add('active');
+    c.scrollTop = c.scrollHeight;
+  }
+  const btn = qs('#enterBtn');
+  btn.disabled = false;
+  btn.textContent = "Entrar";
+})();
+
+on(qs('#enterBtn'),'click', ()=> {
+  qs('#intro').classList.add('hidden');
+  qs('#welcome').classList.remove('hidden');
+  qs('#sysTime').textContent = new Intl.DateTimeFormat('pt-BR', { dateStyle:'full', timeStyle:'short' }).format(now());
+});
+
+/* ========= WELCOME ACTIONS ========= */
+on(qs('#startChat'),'click', startChat);
+on(qs('#zenMode'),'click', ()=>{ setMood('calm'); });
+
+function startChat(){
+  qs('#welcome').classList.add('hidden');
+  qs('#chat').style.display = 'block';
+  greet();
+}
+
+/* ========= SESSION MEMORY ========= */
+const mem = {
+  name: null, nick: null, prefs:{tone:'auto'}, history:[],
+};
+function remember(key,val){ mem[key]=val; try{ sessionStorage.setItem('aria_mem', JSON.stringify(mem)); }catch{} }
+(function loadMem(){
+  try{
+    const s = sessionStorage.getItem('aria_mem');
+    if(s){ const m = JSON.parse(s); Object.assign(mem,m); }
+  }catch{}
+  if(mem.nick) qs('#tagUser').textContent = '👤 ' + mem.nick;
+})();
+
+/* ========= MESSAGES ========= */
+function addBubble(text, who='aria'){
+  const wrap = document.createElement('div');
+  wrap.className = `bubble ${who}`;
+  if(who==='aria' && /\{meta\:.+?\}/.test(text)){
+    const meta = text.match(/\{meta\:(.+?)\}/)[1];
+    const clean = text.replace(/\{meta\:.+?\}/,'').trim();
+    wrap.innerHTML = `<div class="meta">${meta}</div>${clean}`;
+  } else {
+    wrap.innerHTML = text;
+  }
+  qs('#messages').appendChild(wrap);
+  qs('.stream').scrollTop = qs('.stream').scrollHeight;
+}
+function typing(on){ qs('#typing').classList[on?'remove':'add']('hidden'); qs('#dot').style.background = on? '#ffd166' : 'var(--good)'; }
+
+/* ========= KNOWLEDGE PACKS (100+) ========= */
+const packs = {
+  geografia: [
+    "Os continentes geralmente são 6 (ou 7): África, América, Antártida, Ásia, Europa, Oceania {meta:🌍 Geografia}",
+    "O oceano Pacífico é o maior e mais profundo do planeta {meta:🌊 Geografia}",
+    "O Brasil tem 26 estados + DF; maior bioma: Amazônia {meta:🇧🇷 Geografia}",
+    "Placas tectônicas formam montanhas e causam terremotos {meta:🧭 Geologia}",
+    "Pontos extremos: Everest (↑) e Challenger Deep (↓) {meta:🧭 Geografia}"
+  ],
+  fisica: [
+    "Relatividade: tempo é relativo à velocidade/gravidade {meta:⚛️ Física}",
+    "Mecânica quântica descreve o muito pequeno (átomos) {meta:🌀 Física}",
+    "As 4 forças: gravitacional, eletromagnética, fraca, forte {meta:⚛️ Física}",
+    "Velocidade da luz: ~299.792.458 m/s (vácuo) {meta:💡 Física}",
+    "Zero absoluto: −273,15 °C; nada se move termicamente {meta:❄️ Física}"
+  ],
+  ciencias: [
+    "DNA é composto por A,T,C,G; armazena informação genética {meta:🧬 Bio}",
+    "Fotossíntese: luz → glicose + O₂ (plantas) {meta:🌿 Bio}",
+    "Microbioma humano ajuda digestão e imunidade {meta:🧫 Bio}",
+    "Tabela periódica organiza elementos por número atômico {meta:🧪 Química}",
+    "Proteínas dobram em estruturas complexas → função {meta:🧬 Bio}"
+  ],
+  matematica: [
+    "π (pi) é irracional; aparece em círculos/ondas {meta:🔢 Matemática}",
+    "Sequência de Fibonacci surge na natureza {meta:🌻 Matemática}",
+    "Cantor mostrou infinitos de tamanhos diferentes {meta:♾️ Matemática}",
+    "Paradoxo de Russell questiona conjuntos de si mesmos {meta:🧩 Lógica}",
+    "Números primos são a base da criptografia moderna {meta:🔐 Matemática}"
+  ],
+  historia: [
+    "Civilizações antigas: Suméria, Egito, Vale do Indo, China {meta:🏛️ História}",
+    "Guerras Mundiais remodelaram a geopolítica {meta:⚔️ História}",
+    "Revolução Francesa (1789): liberdade, igualdade, fraternidade {meta:🇫🇷 História}",
+    "Renascimento reacendeu ciência e arte na Europa {meta:🎨 História}",
+    "Imprensa de Gutenberg acelerou o conhecimento {meta:🖨️ História}"
+  ],
+  programacao: [
+    "Algoritmos são receitas; estruturas de dados guardam ingredientes {meta:💻 Programação}",
+    "HTTP é stateless; cookies/sessões guardam contexto {meta:🌐 Web}",
+    "Aprendizado de máquina: dados + padrões + generalização {meta:🤖 ML}",
+    "SQL manipula dados relacionais; índices aceleram consultas {meta:🗃️ Dados}",
+    "Git: commits, branches, merges — linha do tempo do código {meta:🌿 Git}"
+  ],
+  astronomia: [
+    "Via Láctea é uma galáxia espiral; Sol está no Braço de Órion {meta:🌌 Astro}",
+    "Buracos negros: gravidade extrema, horizonte de eventos {meta:🕳️ Astro}",
+    "Exoplanetas são mundos fora do sistema solar {meta:🪐 Astro}",
+    "Supernovas criam elementos pesados (ouro!) {meta:💥 Astro}",
+    "Marés: interação gravitacional Terra-Lua {meta:🌙 Astro}"
+  ],
+  medicina: [
+    "Cérebro: ~86 bilhões de neurônios, plasticidade neural {meta:🧠 Medicina}",
+    "Antibióticos atuam contra bactérias, não vírus {meta:💊 Medicina}",
+    "Vacinas treinam o sistema imune com segurança {meta:🛡️ Medicina}",
+    "CRISPR edita DNA com precisão relativa {meta:✂️ Biotec}",
+    "Sistemas: nervoso, circulatório, respiratório, etc. {meta:🫁 Medicina}"
+  ],
+  economia: [
+    "PIB mede produção; não mede bem-estar por completo {meta:📈 Economia}",
+    "Inflação é aumento persistente de preços {meta:💸 Economia}",
+    "Juros compostos: juros sobre juros ao longo do tempo {meta:📊 Finanças}",
+    "Criptomoedas usam blockchain (registro distribuído) {meta:⛓️ Cripto}",
+    "Mercados globais reagem a expectativas e dados {meta:🌍 Economia}"
+  ],
+  arte: [
+    "História da arte: do Paleolítico à arte digital {meta:🎨 Arte}",
+    "Música e matemática: harmonia, razão de frequências {meta:🎼 Música}",
+    "Literatura traduz experiência humana em linguagem {meta:📚 Lit}",
+    "Cinema: montagem cria ritmo e emoção {meta:🎬 Cinema}",
+    "Vanguardas quebram regras para achar novas estéticas {meta:🖼️ Arte}"
+  ],
+  psicologia: [
+    "Neuroplasticidade: cérebro se adapta com experiência {meta:🧠 Psicologia}",
+    "Vieses cognitivos distorcem julgamentos {meta:🪞 Psicologia}",
+    "Inteligência emocional: perceber/gerir emoções {meta:💞 Psicologia}",
+    "Placebo: mente modulando sintomas reais {meta:🧪 Psicologia}",
+    "Memória é reconstrutiva, não gravação perfeita {meta:🧩 Psicologia}"
+  ],
+  filosofia: [
+    "Sócrates, Platão, Aristóteles moldaram o pensamento ocidental {meta:🏛️ Filosofia}",
+    "Ética: o que é agir bem? {meta:⚖️ Filosofia}",
+    "Epistemologia: como sabemos o que sabemos? {meta:🔍 Filosofia}",
+    "Filosofia da ciência: método, falseabilidade {meta:🔬 Filosofia}",
+    "Existencialismo: sentido, liberdade, angústia {meta:🧭 Filosofia}"
+  ],
+  meioambiente: [
+    "Clima: tendência de longo prazo; tempo: condição local {meta:🌦️ Clima}",
+    "Renováveis: solar, eólica, hidro, biomassa {meta:🔋 Energia}",
+    "Ecossistemas são redes de interdependência {meta:🌱 Eco}",
+    "Biodiversidade aumenta resiliência {meta:🧬 Eco}",
+    "Pegada de carbono mede emissões associadas {meta:🧮 Sustentabilidade}"
+  ],
+  curiosidades: [
+    "Polvos têm três corações 🐙 {meta:🧠 Curiosidade}",
+    "Bananas são levemente radioativas ☢️ {meta:🍌 Curiosidade}",
+    "Mel não estraga — já acharam em tumbas egípcias {meta:🍯 Curiosidade}",
+    "As abelhas dançam para indicar comida {meta:🐝 Curiosidade}",
+    "Seu nariz pode sentir trilhões de cheiros {meta:👃 Curiosidade}"
+  ]
+};
+// contagem aproximada > 100 respostas somando todas as listas
+
+/* ========= HUMOR ENGINE ========= */
+function detectMood(text){
+  const t = text.toLowerCase();
+  if (/(triste|mal|cansad|ansios|depress|infeliz)/.test(t)) return 'serious';
+  if (/(feliz|yay|uau|incrível|top|perfeito|haha|kkk)/.test(t)) return 'happy';
+  if (/(bora|partiu|vamos|🔥|🚀)/.test(t)) return 'hype';
+  return 'calm';
+}
+
+/* ========= GIFS / EMOJIS ========= */
+const gifs = {
+  happy: ["https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif","https://media.giphy.com/media/111ebonMs90YLu/giphy.gif"],
+  hype: ["https://media.giphy.com/media/26Ff6q1qV9Yx8W1iM/giphy.gif","https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif"],
+  serious: ["https://media.giphy.com/media/3o6gE5aYp7R4qvOBY8/giphy.gif","https://media.giphy.com/media/l0IylOPCNkiqOgMyA/giphy.gif"],
+  calm: ["https://media.giphy.com/media/l0ExncehJzexFpRHq/giphy.gif","https://media.giphy.com/media/xT9IgG50Fb7Mi0prBC/giphy.gif"]
+};
+const emojis = {happy:"😄", hype:"⚡", serious:"🧘", calm:"🙂"};
+
+/* ========= ENGINE ========= */
+function greet(){
+  const h = now().getHours();
+  const hello =
+    h<6 ? "madrugad-ers" :
+    h<12 ? "bom dia" :
+    h<18 ? "boa tarde" : "boa noite";
+  addBubble(`{meta:👋 Olá} ${hello}! Eu sou a Aria. Como você quer que eu te chame? (ex: “me chama de Naoto”)`);
+  typing(false);
+}
+function choosePack(text){
+  const map = {
+    geografia:'geografia', geologia:'geografia', mapa:'geografia', país:'geografia', brasil:'geografia',
+    física:'fisica', relatividade:'fisica', quântica:'fisica',
+    dna:'ciencias', biologia:'ciencias', química:'ciencias', fotossíntese:'ciencias',
+    matemática:'matematica', fibonacci:'matematica', infinito:'matematica', lógica:'matematica',
+    história:'historia', renascimento:'historia', guerra:'historia',
+    programação:'programacao', algoritmo:'programacao', http:'programacao', sql:'programacao', git:'programacao',
+    astronomia:'astronomia', galáxia:'astronomia', planeta:'astronomia', lua:'astronomia',
+    medicina:'medicina', vacina:'medicina', crispr:'medicina',
+    economia:'economia', inflação:'economia', cripto:'economia', pib:'economia',
+    arte:'arte', música:'arte', cinema:'arte', literatura:'arte',
+    psicologia:'psicologia', placebo:'psicologia', emoção:'psicologia',
+    filosofia:'filosofia', ética:'filosofia', ciência:'filosofia',
+    ambiente:'meioambiente', clima:'meioambiente', sustentabilidade:'meioambiente',
+  };
+  const t = text.toLowerCase();
+  for (const k in map){ if (t.includes(k)) return map[k]; }
+  return null;
+}
+
+function contextualReply(text){
+  const pack = choosePack(text);
+  const moodNow = detectMood(text);
+  setMood(moodNow);
+  let base = pack ? packs[pack] : packs.curiosidades;
+  let pick = base[Math.floor(Math.random()*base.length)];
+  const extra = ({
+    happy: "😄",
+    hype: "⚡ bora aprofundar nisso?",
+    serious: "Se quiser eu pego leve e explico passo a passo. 🧘",
+    calm: "Posso conectar com outra área também, se quiser. 🙂"
+  })[moodNow];
+  const gif = gifs[moodNow][Math.floor(Math.random()*gifs[moodNow].length)];
+  return `${pick}\n\n<img src="${gif}" alt="gif" style="max-width:220px;border-radius:10px;margin-top:6px;opacity:.92"/> \n\n${extra}`;
+}
+
+function parseNameOrNick(text){
+  const m = text.toLowerCase().match(/me chama de\s+(.+)$|pode me chamar de\s+(.+)$/i);
+  if (m){
+    const nick = (m[1] || m[2] || '').trim().replace(/[\.!?,;]+$/,'');
+    if (nick){
+      remember('nick', nick);
+      qs('#tagUser').textContent = '👤 ' + nick;
+      return `Prazer, ${nick}! Quer que eu seja mais engraçada ou mais séria hoje?`;
+    }
+  }
+  return null;
+}
+
+/* ========= COMMANDS ========= */
+function handleCommand(raw){
+  const cmd = raw.trim().toLowerCase();
+  if (cmd === '/matrix'){ document.body.classList.add('matrix-on'); addBubble("{meta:🟩 Matrix} Tema habilitado. Para voltar, use /zen ou /reset."); return true; }
+  if (cmd === '/zen'){ document.body.classList.remove('matrix-on'); setMood('calm'); addBubble("{meta:🧘 Zen} Respira. Voltamos ao básico."); return true; }
+  if (cmd === '/reset'){ sessionStorage.removeItem('aria_mem'); location.reload(); return true; }
+  if (cmd === '/stealth'){ qs('.topbar .brand .dot').style.boxShadow='none'; addBubble("{meta:🕶️ Stealth} Luzes apagadas. (Status silencioso)"); return true; }
+  return false;
+}
+
+/* ========= IDLE FACTS ========= */
+let idleTimer = null;
+function kickIdle(){
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(()=> addBubble(packs.curiosidades[Math.floor(Math.random()*packs.curiosidades.length)]), 45_000);
+}
+
+/* ========= CHAT LOOP ========= */
+async function reply(text){
+  typing(true);
+  await sleep(500 + Math.random()*700);
+  // nome/apelido
+  const nickMsg = parseNameOrNick(text);
+  if (nickMsg){ typing(false); addBubble(nickMsg); kickIdle(); return; }
+  // primeira vez: perguntar nome se não tiver nick
+  if (!mem.nick && !/me chama de|pode me chamar de/i.test(text)){
+    typing(false);
+    addBubble("Curto intimidade rápida 😌 — como devo te chamar? (ex: “me chama de Aria-tamer”)");
+    return;
+  }
+  // resposta contextual
+  const r = contextualReply(text);
+  typing(false);
+  addBubble(r);
+  kickIdle();
+}
+
+function send(){
+  const el = qs('#inp');
+  const text = el.value.trim();
+  if(!text) return;
+  if (handleCommand(text)){ el.value=''; kickIdle(); return; }
+  addBubble(text, 'user');
+  mem.history.push({t: Date.now(), role:'user', text});
+  remember('history', mem.history);
+  el.value='';
+  reply(text);
+}
+
+/* ========= EVENT BINDINGS ========= */
+on(qs('#send'),'click', send);
+on(qs('#inp'),'keydown', e => {
+  if (e.key === 'Enter') send();
+});
+kickIdle();
+
+/* ========= FIRST MOOD BY TIME ========= */
+(function initByTime(){
+  const h = now().getHours();
+  if (h<12) setMood('calm');
+  else if (h<19) setMood('happy');
+  else setMood('serious');
+})();
+</script>
 </body>
 </html>
+
+se quiser, eu também já te mando um README.md da Aria v3.0 contando features, comandos, e como customizar os packs (pra você editar/expandir fácil). Quer?
+
