@@ -1,71 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Kai</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1e1e2f;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            color: #00f2ff;
-        }
-        form {
-            margin-top: 20px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            width: 300px;
-            border-radius: 5px;
-            border: none;
-        }
-        button {
-            padding: 10px;
-            margin-left: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #00f2ff;
-            color: #000;
-            cursor: pointer;
-        }
-        .resposta {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #f0f0f0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athena Chat</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-  <link rel="icon" href="https://emoji.gg/assets/emoji/5273-blurple-bot.png">
 <body>
-    <h1>Kai 🤖</h1>
-    <form id="chatForm">
-        <input type="text" id="pergunta" placeholder="Digite sua pergunta...">
-        <button type="submit">Enviar</button>
-    </form>
-    <div class="resposta" id="resposta"></div>
-
-    <script>
-        document.getElementById('chatForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const pergunta = document.getElementById('pergunta').value;
-
-            const response = await fetch('/responder', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ pergunta })
-            });
-
-            const data = await response.json();
-            document.getElementById('resposta').innerText = data.resposta;
-        });
-    </script>
+  <header>
+    <h1>Athena Chat</h1>
+  </header>
+  <main>
+    <section id="login">
+      <input type="text" id="nickname" placeholder="Escolha um nome" />
+      <button onclick="entrar()">Entrar</button>
+    </section>
+    <section id="salas" style="display: none;">
+      <h2>Salas de Chat</h2>
+      <div class="sala" onclick="entrarSala('Brasil')">
+        <img src="brasil.png" alt="Brasil">
+        <span>Brasil</span>
+      </div>
+      <div class="sala" onclick="entrarSala('Amizade')">
+        <img src="amizade.png" alt="Amizade">
+        <span>Amizade</span>
+      </div>
+      <!-- Adicione mais salas conforme necessário -->
+    </section>
+    <section id="chat" style="display: none;">
+      <div id="video"></div>
+      <div id="mensagens"></div>
+      <input type="text" id="mensagem" placeholder="Digite sua mensagem" />
+      <button onclick="enviarMensagem()">Enviar</button>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Athena Chat</p>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
