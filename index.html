@@ -1,39 +1,382 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sofia Chat</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="icon.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso - Studio Tsukiyo Platforms</title>
+    <meta name="description" content="Termos de Uso da Studio Tsukiyo Platforms - Última atualização: 20/06/2025">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .logo {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .last-update {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 500;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.1em;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #555;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .contact-section h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .email-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 12px 24px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .email-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            margin: 30px 0;
+        }
+
+        .definitions {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 25px;
+                margin: 10px 0;
+                border-radius: 15px;
+            }
+            
+            .logo {
+                font-size: 2em;
+            }
+            
+            h1 {
+                font-size: 1.6em;
+            }
+            
+            h2 {
+                font-size: 1.2em;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-<div id="chat-container">
-  <div id="header">
-    <h2 id="bot-name">Sofia 🤖</h2>
-    <span>Online</span>
-    <button id="menu-toggle">☰</button>
-  </div>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="logo">Studio Tsukiyo</div>
+                <div class="subtitle">Platforms</div>
+                <div class="last-update">Última atualização: 20/06/2025</div>
+            </div>
 
-  <div id="chat-menu">
-    <button onclick="exportChat()">📤 Exportar chat</button>
-    <button onclick="deleteChat()">🗑️ Excluir chat</button>
-    <button onclick="saveChat()">💾 Salvar chat</button>
-    <button onclick="shareChat()">🔗 Compartilhar chat</button>
-    <button onclick="createReminderPrompt()">📝 Criar lembrete</button>
-    <button onclick="createEventPrompt()">📅 Criar evento</button>
-    <button onclick="renameUser()">✏️ Renomear você</button>
-    <button onclick="renameBot()">🤖 Renomear Sofia</button>
-  </div>
+            <h1>Termos de Uso</h1>
 
-  <div id="messages"></div>
+            <div class="intro">
+                <p><strong>Bem-vindo(a) à Studio Tsukiyo Platforms ("Plataforma").</strong> Estes Termos de Uso ("Termos") regem o acesso e a utilização de nossos serviços, produtos, conteúdos, funcionalidades e recursos disponibilizados por meio da Plataforma, de forma online ou offline.</p>
+                <p>Ao acessar ou utilizar a Plataforma, você reconhece que leu, entendeu e concorda em cumprir estes Termos. Caso não concorde, não utilize a Plataforma.</p>
+            </div>
 
-  <div id="input-area">
-    <input type="text" id="input" placeholder="Digite sua mensagem..." />
-    <button id="send">Enviar</button>
-  </div>
-</div>
+            <div class="section">
+                <h2>1. Definições</h2>
+                <div class="definitions">
+                    <p>Para fins destes Termos:</p>
+                    <p><strong>Usuário:</strong> Pessoa física ou jurídica que acessa ou utiliza a Plataforma.</p>
+                    <p><strong>Conteúdo:</strong> Inclui textos, imagens, áudios, vídeos, código, interfaces, marcas, logotipos e quaisquer outros materiais disponibilizados na Plataforma.</p>
+                    <p><strong>Serviços:</strong> Funcionalidades, produtos digitais e recursos oferecidos pela Plataforma.</p>
+                </div>
+            </div>
 
-<script src="script.js"></script>
+            <div class="section">
+                <h2>2. Elegibilidade</h2>
+                <p>Para utilizar a Plataforma, você deve:</p>
+                <ul>
+                    <li>Ter, no mínimo, 13 anos de idade (ou a idade mínima exigida por lei em sua jurisdição);</li>
+                    <li>Possuir capacidade legal para celebrar contratos;</li>
+                    <li>Cumprir integralmente estes Termos e as leis aplicáveis.</li>
+                </ul>
+                <p>Se você estiver aceitando estes Termos em nome de uma empresa ou entidade, declara possuir poderes para vincular essa entidade a este acordo.</p>
+            </div>
+
+            <div class="section">
+                <h2>3. Uso da Plataforma</h2>
+                <p>O Usuário concorda em utilizar a Plataforma exclusivamente para fins legais e em conformidade com estes Termos. É vedado:</p>
+                <ul>
+                    <li>Utilizar os Serviços de forma que viole direitos de terceiros, incluindo propriedade intelectual e privacidade;</li>
+                    <li>Tentar obter acesso não autorizado a sistemas, redes ou dados;</li>
+                    <li>Distribuir vírus, malwares ou executar ataques que comprometam a segurança da Plataforma;</li>
+                    <li>Utilizar os Serviços para fins ilícitos, enganosos, fraudulentos ou abusivos.</li>
+                </ul>
+                <p>A violação destes Termos poderá resultar na suspensão ou encerramento imediato da conta do Usuário.</p>
+            </div>
+
+            <div class="section">
+                <h2>4. Conta e Segurança</h2>
+                <ul>
+                    <li>O Usuário é responsável por manter a confidencialidade de suas credenciais de acesso.</li>
+                    <li>Todas as atividades realizadas sob sua conta são de sua exclusiva responsabilidade.</li>
+                    <li>A Plataforma não se responsabiliza por acessos não autorizados resultantes de negligência do Usuário em proteger suas credenciais.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>5. Direitos de Propriedade Intelectual</h2>
+                <ul>
+                    <li>Todo o Conteúdo disponibilizado pela Plataforma, incluindo software, design, textos, imagens, marcas e logotipos, é de propriedade exclusiva da Studio Tsukiyo Platforms ou de seus licenciadores.</li>
+                    <li>O Usuário recebe apenas uma licença limitada, pessoal, não exclusiva e intransferível para utilizar os Serviços, sem qualquer direito de sublicenciamento.</li>
+                    <li>É proibida a reprodução, distribuição, modificação ou criação de obras derivadas sem autorização expressa por escrito.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>6. Conteúdo do Usuário</h2>
+                <ul>
+                    <li>O Usuário pode submeter conteúdo à Plataforma, desde que não viole estes Termos ou a legislação aplicável.</li>
+                    <li>Ao enviar conteúdo, o Usuário concede à Studio Tsukiyo Platforms uma licença mundial, gratuita, não exclusiva e transferível para usar, reproduzir, distribuir, exibir e adaptar tal conteúdo, exclusivamente para fins de operação, promoção e melhoria dos Serviços.</li>
+                    <li>O Usuário declara possuir todos os direitos necessários para compartilhar o conteúdo enviado.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>7. Privacidade e Proteção de Dados</h2>
+                <p>O tratamento de dados pessoais é regido pela Política de Privacidade, parte integrante destes Termos. Ao utilizar nossos produtos, o Usuário consente com a coleta, uso e processamento de seus dados conforme descrito nesta Política.</p>
+            </div>
+
+            <div class="section">
+                <h2>8. Suspensão e Encerramento</h2>
+                <p>A Studio Tsukiyo Platforms poderá, a seu critério exclusivo e sem aviso prévio:</p>
+                <ul>
+                    <li>Suspender ou encerrar a conta do Usuário que viole estes Termos ou a lei aplicável;</li>
+                    <li>Restringir o acesso a determinados Serviços;</li>
+                    <li>Remover conteúdos considerados inadequados, ilegais ou em desacordo com as diretrizes da Plataforma.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>9. Limitação de Responsabilidade</h2>
+                <ul>
+                    <li>A Plataforma é fornecida "no estado em que se encontra", sem garantias de disponibilidade, continuidade ou ausência de falhas.</li>
+                    <li>A Studio Tsukiyo Platforms não se responsabiliza por perdas, danos indiretos, lucros cessantes ou prejuízos decorrentes do uso ou da incapacidade de uso da Plataforma.</li>
+                    <li>O Usuário utiliza os Serviços sob sua própria conta e risco.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>10. Alterações nos Termos</h2>
+                <p>A Studio Tsukiyo Platforms poderá modificar estes Termos a qualquer momento. As alterações entrarão em vigor na data de publicação. O uso contínuo dos produtos após a atualização constitui aceitação das mudanças.</p>
+            </div>
+
+            <div class="section">
+                <h2>11. Disposições Gerais</h2>
+                <ul>
+                    <li>Estes Termos constituem o acordo integral entre o Usuário e a Studio Tsukiyo Platforms.</li>
+                    <li>Caso qualquer disposição destes Termos seja considerada inválida ou inexequível, as demais permanecerão em pleno vigor.</li>
+                    <li>A falha em exigir o cumprimento de qualquer disposição não constitui renúncia de direito.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>12. Legislação e Foro</h2>
+                <ul>
+                    <li>Estes Termos serão regidos e interpretados de acordo com as leis da jurisdição aplicável.</li>
+                    <li>Fica eleito o foro da comarca de Vitória/ES, com exclusão de qualquer outro, por mais privilegiado que seja, para dirimir controvérsias decorrentes destes Termos.</li>
+                </ul>
+            </div>
+
+            <div class="contact-section">
+                <h2>Contato</h2>
+                <p>Em caso de dúvidas sobre estes termos ou políticas:</p>
+                <a href="mailto:sac.studiotsukiyo@outlook.com" class="email-link">sac.studiotsukiyo@outlook.com</a>
+            </div>
+
+            <div class="footer">
+                <p>&copy; 2025 Studio Tsukiyo Platforms. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll indicator
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover effects to sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            section.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
 </body>
 </html>
