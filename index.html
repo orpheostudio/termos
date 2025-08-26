@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termos de Uso - Studio Tsukiyo Platforms</title>
     <meta name="description" content="Termos de Uso da Studio Tsukiyo Platforms - Última atualização: 20/06/2025">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366F1;
+            --primary-dark: #4F46E5;
+            --secondary: #8B5CF6;
+            --accent: #EC4899;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --success: #10B981;
+            --card-bg: rgba(255, 255, 255, 0.97);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,176 +28,268 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--dark);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            z-index: 10;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid #667eea;
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .logo {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 2.5em;
+            font-size: 3rem;
             font-weight: 800;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            color: #666;
-            font-size: 1.2em;
-            font-weight: 300;
+            color: var(--gray);
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 20px;
         }
 
         .last-update {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: 12px 28px;
+            border-radius: 30px;
             display: inline-block;
             font-weight: 500;
-            margin-top: 20px;
-            font-size: 0.9em;
+            margin-top: 25px;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
         }
 
         h1 {
-            color: #333;
-            font-size: 2em;
-            margin-bottom: 30px;
+            color: var(--dark);
+            font-size: 2.4rem;
+            margin-bottom: 40px;
             text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
 
         h2 {
-            color: #667eea;
-            font-size: 1.4em;
-            margin: 30px 0 15px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f0f0;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin: 40px 0 20px 0;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2 i {
+            color: var(--secondary);
+            font-size: 1.3rem;
         }
 
         h3 {
-            color: #764ba2;
-            font-size: 1.1em;
-            margin: 20px 0 10px 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin: 25px 0 15px 0;
             font-weight: 600;
         }
 
         p {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: justify;
-            color: #555;
+            color: var(--dark);
+            font-weight: 400;
         }
 
         ul {
-            margin: 15px 0;
-            padding-left: 25px;
+            margin: 20px 0;
+            padding-left: 30px;
         }
 
         li {
-            margin-bottom: 8px;
-            color: #555;
+            margin-bottom: 12px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        li::marker {
+            color: var(--primary);
         }
 
         .intro {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-            border-left: 4px solid #667eea;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6edff 100%);
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .contact-section {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            margin-top: 40px;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
         .contact-section h2 {
             color: white;
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+            justify-content: center;
+        }
+
+        .contact-section h2 i {
+            color: white;
         }
 
         .email-link {
-            color: #ffffff;
+            color: white;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1em;
-            padding: 15px 30px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            display: inline-block;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+            font-size: 1.1rem;
+            padding: 16px 35px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
         }
 
         .email-link:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .email-link:active {
-            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .acceptance-section {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            margin: 40px 0;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .acceptance-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
         }
 
         .acceptance-section h2 {
             color: white;
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            position: relative;
+        }
+
+        .acceptance-section h2 i {
+            color: white;
         }
 
         .checkbox-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 25px 0;
+            margin: 30px 0;
             flex-wrap: wrap;
+            position: relative;
         }
 
         .custom-checkbox {
@@ -193,29 +300,36 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.1rem;
             font-weight: 500;
             max-width: 600px;
             text-align: left;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            position: relative;
+            padding: 15px 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
         }
 
         .checkbox-label:hover {
             transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.25);
         }
 
         .checkmark {
-            width: 25px;
-            height: 25px;
+            width: 28px;
+            height: 28px;
             border: 2px solid rgba(255, 255, 255, 0.7);
-            border-radius: 6px;
+            border-radius: 8px;
             margin-right: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             background: rgba(255, 255, 255, 0.1);
             flex-shrink: 0;
+            position: relative;
         }
 
         .custom-checkbox:checked + .checkbox-label .checkmark {
@@ -226,10 +340,10 @@
 
         .custom-checkbox:checked + .checkbox-label .checkmark::after {
             content: "✓";
-            color: #4CAF50;
+            color: var(--success);
             font-size: 16px;
             font-weight: bold;
-            animation: checkAnimation 0.3s ease;
+            animation: checkAnimation 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
         @keyframes checkAnimation {
@@ -239,47 +353,53 @@
         }
 
         .acceptance-buttons {
-            margin-top: 25px;
+            margin-top: 30px;
+            position: relative;
         }
 
         .confirm-btn {
             background: rgba(255, 255, 255, 0.2);
             color: white;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1.1em;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             backdrop-filter: blur(5px);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .confirm-btn:enabled {
-            background: rgba(255, 255, 255, 0.9);
-            color: #4CAF50;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--success);
             border-color: white;
         }
 
         .confirm-btn:enabled:hover {
             background: white;
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .confirm-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
         }
 
         .acceptance-message {
-            background: rgba(255, 255, 255, 0.9);
-            color: #4CAF50;
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            transition: all 0.5s ease;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--success);
+            padding: 25px;
+            border-radius: 16px;
+            margin-top: 25px;
+            transition: var(--transition);
             border: 2px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
         }
 
         .acceptance-message.hidden {
@@ -292,7 +412,7 @@
             opacity: 1;
             transform: translateY(0);
             display: block;
-            animation: successShow 0.5s ease;
+            animation: successShow 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
         @keyframes successShow {
@@ -302,54 +422,16 @@
         }
 
         .success-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             display: block;
-            animation: bounce 1s infinite;
+            animation: bounce 1.2s infinite;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        @media (max-width: 768px) {
-            .checkbox-label {
-                font-size: 1em;
-                text-align: center;
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .checkmark {
-                margin: 0 auto 10px auto;
-            }
-            
-            .confirm-btn {
-                font-size: 1em;
-                padding: 12px 25px;
-            }
-        }
-
-        .section {
-            margin: 30px 0;
-        }
-
-        .definitions {
-            background: #f8f9ff;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #764ba2;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #eee;
-            color: #888;
-            font-size: 0.9em;
+            40% { transform: translateY(-12px); }
+            60% { transform: translateY(-7px); }
         }
 
         @media (max-width: 768px) {
@@ -358,44 +440,203 @@
             }
             
             .card {
-                padding: 25px;
+                padding: 30px;
                 margin: 10px 0;
-                border-radius: 15px;
+                border-radius: 20px;
             }
             
             .logo {
-                font-size: 2em;
+                font-size: 2.2rem;
+                flex-direction: column;
+                gap: 10px;
             }
             
             h1 {
-                font-size: 1.6em;
+                font-size: 1.8rem;
             }
             
             h2 {
-                font-size: 1.2em;
+                font-size: 1.3rem;
             }
+            
+            .checkbox-label {
+                font-size: 1rem;
+                text-align: center;
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+            
+            .checkmark {
+                margin: 0 auto;
+            }
+            
+            .confirm-btn {
+                font-size: 1rem;
+                padding: 14px 30px;
+            }
+        }
+
+        .section {
+            margin: 35px 0;
+            transition: var(--transition);
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .section:hover {
+            background: rgba(99, 102, 241, 0.03);
+            transform: translateY(-2px);
+        }
+
+        .definitions {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid var(--secondary);
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--gray);
+            font-size: 0.95rem;
         }
 
         .scroll-indicator {
             position: fixed;
             top: 0;
             left: 0;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
             z-index: 1000;
+            transition: width 0.25s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: -150px;
+            right: -150px;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--secondary);
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .reading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
             transition: width 0.3s ease;
+        }
+
+        .section-highlight {
+            position: relative;
+        }
+
+        .section-highlight::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 2px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .section-highlight.active::before {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
+    <div class="reading-progress">
+        <div class="reading-progress-bar" id="readingProgress"></div>
+    </div>
+    
     <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
     
     <div class="container">
         <div class="card">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            
             <div class="header">
-                <div class="logo">Studio Tsukiyo</div>
+                <div class="logo">
+                    <i class="fas fa-moon logo-icon"></i>
+                    Studio Tsukiyo
+                </div>
                 <div class="subtitle">Platforms</div>
-                <div class="last-update">Última atualização: 20/06/2025</div>
+                <div class="last-update">
+                    <i class="fas fa-calendar-alt"></i> Última atualização: 20/06/2025
+                </div>
             </div>
 
             <h1>Termos de Uso</h1>
@@ -405,8 +646,8 @@
                 <p>Ao acessar ou utilizar a Plataforma, você reconhece que leu, entendeu e concorda em cumprir estes Termos. Caso não concorde, não utilize a Plataforma.</p>
             </div>
 
-            <div class="section">
-                <h2>1. Definições</h2>
+            <div class="section section-highlight" id="section-1">
+                <h2><i class="fas fa-book"></i> 1. Definições</h2>
                 <div class="definitions">
                     <p>Para fins destes Termos:</p>
                     <p><strong>Usuário:</strong> Pessoa física ou jurídica que acessa ou utiliza a Plataforma.</p>
@@ -415,8 +656,8 @@
                 </div>
             </div>
 
-            <div class="section">
-                <h2>2. Elegibilidade</h2>
+            <div class="section section-highlight" id="section-2">
+                <h2><i class="fas fa-user-check"></i> 2. Elegibilidade</h2>
                 <p>Para utilizar a Plataforma, você deve:</p>
                 <ul>
                     <li>Ter, no mínimo, 13 anos de idade (ou a idade mínima exigida por lei em sua jurisdição);</li>
@@ -426,8 +667,8 @@
                 <p>Se você estiver aceitando estes Termos em nome de uma empresa ou entidade, declara possuir poderes para vincular essa entidade a este acordo.</p>
             </div>
 
-            <div class="section">
-                <h2>3. Uso da Plataforma</h2>
+            <div class="section section-highlight" id="section-3">
+                <h2><i class="fas fa-laptop-code"></i> 3. Uso da Plataforma</h2>
                 <p>O Usuário concorda em utilizar a Plataforma exclusivamente para fins legais e em conformidade com estes Termos. É vedado:</p>
                 <ul>
                     <li>Utilizar os Serviços de forma que viole direitos de terceiros, incluindo propriedade intelectual e privacidade;</li>
@@ -438,8 +679,8 @@
                 <p>A violação destes Termos poderá resultar na suspensão ou encerramento imediato da conta do Usuário.</p>
             </div>
 
-            <div class="section">
-                <h2>4. Conta e Segurança</h2>
+            <div class="section section-highlight" id="section-4">
+                <h2><i class="fas fa-user-shield"></i> 4. Conta e Segurança</h2>
                 <ul>
                     <li>O Usuário é responsável por manter a confidencialidade de suas credenciais de acesso.</li>
                     <li>Todas as atividades realizadas sob sua conta são de sua exclusiva responsabilidade.</li>
@@ -447,8 +688,8 @@
                 </ul>
             </div>
 
-            <div class="section">
-                <h2>5. Direitos de Propriedade Intelectual</h2>
+            <div class="section section-highlight" id="section-5">
+                <h2><i class="fas fa-copyright"></i> 5. Direitos de Propriedade Intelectual</h2>
                 <ul>
                     <li>Todo o Conteúdo disponibilizado pela Plataforma, incluindo software, design, textos, imagens, marcas e logotipos, é de propriedade exclusiva da Studio Tsukiyo Platforms ou de seus licenciadores.</li>
                     <li>O Usuário recebe apenas uma licença limitada, pessoal, não exclusiva e intransferível para utilizar os Serviços, sem qualquer direito de sublicenciamento.</li>
@@ -456,8 +697,8 @@
                 </ul>
             </div>
 
-            <div class="section">
-                <h2>6. Conteúdo do Usuário</h2>
+            <div class="section section-highlight" id="section-6">
+                <h2><i class="fas fa-file-upload"></i> 6. Conteúdo do Usuário</h2>
                 <ul>
                     <li>O Usuário pode submeter conteúdo à Plataforma, desde que não viole estes Termos ou a legislação aplicável.</li>
                     <li>Ao enviar conteúdo, o Usuário concede à Studio Tsukiyo Platforms uma licença mundial, gratuita, não exclusiva e transferível para usar, reproduzir, distribuir, exibir e adaptar tal conteúdo, exclusivamente para fins de operação, promoção e melhoria dos Serviços.</li>
@@ -465,13 +706,13 @@
                 </ul>
             </div>
 
-            <div class="section">
-                <h2>7. Privacidade e Proteção de Dados</h2>
+            <div class="section section-highlight" id="section-7">
+                <h2><i class="fas fa-shield-alt"></i> 7. Privacidade e Proteção de Dados</h2>
                 <p>O tratamento de dados pessoais é regido pela Política de Privacidade, parte integrante destes Termos. Ao utilizar nossos produtos, o Usuário consente com a coleta, uso e processamento de seus dados conforme descrito nesta Política.</p>
             </div>
 
-            <div class="section">
-                <h2>8. Suspensão e Encerramento</h2>
+            <div class="section section-highlight" id="section-8">
+                <h2><i class="fas fa-ban"></i> 8. Suspensão e Encerramento</h2>
                 <p>A Studio Tsukiyo Platforms poderá, a seu critério exclusivo e sem aviso prévio:</p>
                 <ul>
                     <li>Suspender ou encerrar a conta do Usuário que viole estes Termos ou a lei aplicável;</li>
@@ -480,8 +721,8 @@
                 </ul>
             </div>
 
-            <div class="section">
-                <h2>9. Limitação de Responsabilidade</h2>
+            <div class="section section-highlight" id="section-9">
+                <h2><i class="fas fa-exclamation-triangle"></i> 9. Limitação de Responsabilidade</h2>
                 <ul>
                     <li>A Plataforma é fornecida "no estado em que se encontra", sem garantias de disponibilidade, continuidade ou ausência de falhas.</li>
                     <li>A Studio Tsukiyo Platforms não se responsabiliza por perdas, danos indiretos, lucros cessantes ou prejuízos decorrentes do uso ou da incapacidade de uso da Plataforma.</li>
@@ -489,13 +730,13 @@
                 </ul>
             </div>
 
-            <div class="section">
-                <h2>10. Alterações nos Termos</h2>
+            <div class="section section-highlight" id="section-10">
+                <h2><i class="fas fa-sync-alt"></i> 10. Alterações nos Termos</h2>
                 <p>A Studio Tsukiyo Platforms poderá modificar estes Termos a qualquer momento. As alterações entrarão em vigor na data de publicação. O uso contínuo dos produtos após a atualização constitui aceitação das mudanças.</p>
             </div>
 
-            <div class="section">
-                <h2>11. Disposições Gerais</h2>
+            <div class="section section-highlight" id="section-11">
+                <h2><i class="fas fa-file-contract"></i> 11. Disposições Gerais</h2>
                 <ul>
                     <li>Estes Termos constituem o acordo integral entre o Usuário e a Studio Tsukiyo Platforms.</li>
                     <li>Caso qualquer disposição destes Termos seja considerada inválida ou inexequível, as demais permanecerão em pleno vigor.</li>
@@ -503,8 +744,8 @@
                 </ul>
             </div>
 
-            <div class="section">
-                <h2>12. Legislação e Foro</h2>
+            <div class="section section-highlight" id="section-12">
+                <h2><i class="fas fa-balance-scale"></i> 12. Legislação e Foro</h2>
                 <ul>
                     <li>Estes Termos serão regidos e interpretados de acordo com as leis da jurisdição aplicável.</li>
                     <li>Fica eleito o foro da comarca de Vitória/ES, com exclusão de qualquer outro, por mais privilegiado que seja, para dirimir controvérsias decorrentes destes Termos.</li>
@@ -512,7 +753,7 @@
             </div>
 
             <div class="acceptance-section">
-                <h2>Aceitar Termos de Uso</h2>
+                <h2><i class="fas fa-check-circle"></i> Aceitar Termos de Uso</h2>
                 <div class="checkbox-container">
                     <input type="checkbox" id="acceptTerms" class="custom-checkbox">
                     <label for="acceptTerms" class="checkbox-label">
@@ -522,7 +763,7 @@
                 </div>
                 <div class="acceptance-buttons">
                     <button id="confirmButton" class="confirm-btn" disabled>
-                        ✅ Confirmar Aceitação
+                        <i class="fas fa-check"></i> Confirmar Aceitação
                     </button>
                     <div id="acceptanceMessage" class="acceptance-message hidden">
                         <span class="success-icon">🎉</span>
@@ -533,9 +774,11 @@
             </div>
 
             <div class="contact-section">
-                <h2>Contato</h2>
+                <h2><i class="fas fa-envelope"></i> Contato</h2>
                 <p>Em caso de dúvidas sobre estes termos ou políticas:</p>
-                <a href="mailto:sac.studiotsukiyo@outlook.com?subject=Dúvida sobre Termos de Uso - Studio Tsukiyo Platforms&body=Olá,%0D%0A%0D%0ATenho uma dúvida sobre os Termos de Uso da Studio Tsukiyo Platforms.%0D%0A%0D%0AMinha dúvida é:%0D%0A%0D%0A%0D%0AObrigado(a)!" class="email-link">📧 Enviar E-mail</a>
+                <a href="mailto:sac.studiotsukiyo@outlook.com?subject=Dúvida sobre Termos de Uso - Studio Tsukiyo Platforms&body=Olá,%0D%0A%0D%0ATenho uma dúvida sobre os Termos de Uso da Studio Tsukiyo Platforms.%0D%0A%0D%0AMinha dúvida é:%0D%0A%0D%0A%0D%0AObrigado(a)!" class="email-link">
+                    <i class="fas fa-paper-plane"></i> Enviar E-mail
+                </a>
             </div>
 
             <div class="footer">
@@ -609,6 +852,37 @@
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (scrollTop / scrollHeight) * 100;
             document.getElementById('scrollIndicator').style.width = scrolled + '%';
+            
+            // Reading progress
+            document.getElementById('readingProgress').style.width = scrolled + '%';
+            
+            // Back to top button
+            if (scrollTop > 500) {
+                document.getElementById('backToTop').classList.add('visible');
+            } else {
+                document.getElementById('backToTop').classList.remove('visible');
+            }
+            
+            // Section highlighting
+            const sections = document.querySelectorAll('.section-highlight');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollTop >= sectionTop - 300 && scrollTop < sectionTop + sectionHeight - 100) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        });
+
+        // Back to top functionality
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // Smooth scroll for anchor links
@@ -628,12 +902,14 @@
         // Add hover effects to sections
         document.querySelectorAll('.section').forEach(section => {
             section.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-2px)';
-                this.style.transition = 'transform 0.3s ease';
+                this.style.transform = 'translateY(-5px)';
+                this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
             });
             
             section.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
             });
         });
     </script>
