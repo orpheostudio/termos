@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos de Uso - Studio Tsukiyo Platforms</title>
-    <meta name="description" content="Termos de Uso da Studio Tsukiyo Platforms - Última atualização: 20/06/2025">
+    <title>Termos de Uso - ORPHEO Platforms</title>
+    <meta name="description" content="Termos de Uso da ORPHEO Platforms - Design Inovador 2025">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366F1;
-            --primary-dark: #4F46E5;
-            --secondary: #8B5CF6;
-            --accent: #EC4899;
-            --dark: #1F2937;
-            --light: #F9FAFB;
-            --gray: #6B7280;
-            --success: #10B981;
-            --card-bg: rgba(255, 255, 255, 0.97);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary: #ff6b35;
+            --secondary: #f7931e;
+            --accent: #e91e63;
+            --dark: #0f0f23;
+            --dark-secondary: #1a1a2e;
+            --light: #ffffff;
+            --gray: #8892b0;
+            --success: #64ffda;
+            --glow: rgba(255, 107, 53, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -28,268 +30,360 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
             line-height: 1.6;
-            color: var(--dark);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 50px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative;
-            overflow: hidden;
         }
 
-        .card::before {
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(45deg, #0f0f23, #1a1a2e, #16213e);
+        }
+
+        .animated-bg::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-            z-index: 10;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='grid' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 10 0 L 0 0 0 10' fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.03'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23grid)'/%3E%3C/svg%3E");
+            animation: gridMove 20s linear infinite;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            position: relative;
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10px, 10px); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 8s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation Bar */
+        .nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
         }
 
         .logo {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .logo-icon {
-            font-size: 2.8rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 50px;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            animation: slideInUp 1s ease-out 0.4s both;
+            transition: all 0.3s ease;
+        }
+
+        .hero-date:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--glow);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+            transition: all 0.8s ease;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+            border-color: var(--primary);
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .section-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .section-icon {
+            margin-left: auto;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            color: var(--gray);
-            font-size: 1.3rem;
-            font-weight: 400;
+        /* Content */
+        .content p {
             margin-bottom: 20px;
-        }
-
-        .last-update {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 12px 28px;
-            border-radius: 30px;
-            display: inline-block;
-            font-weight: 500;
-            margin-top: 25px;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-        }
-
-        h1 {
-            color: var(--dark);
-            font-size: 2.4rem;
-            margin-bottom: 40px;
-            text-align: center;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 20px;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-        }
-
-        h2 {
-            color: var(--primary-dark);
-            font-size: 1.5rem;
-            margin: 40px 0 20px 0;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        h2 i {
-            color: var(--secondary);
-            font-size: 1.3rem;
-        }
-
-        h3 {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-        }
-
-        p {
-            margin-bottom: 20px;
-            text-align: justify;
-            color: var(--dark);
-            font-weight: 400;
-        }
-
-        ul {
-            margin: 20px 0;
-            padding-left: 30px;
-        }
-
-        li {
-            margin-bottom: 12px;
-            color: var(--dark);
-            position: relative;
-        }
-
-        li::marker {
-            color: var(--primary);
-        }
-
-        .intro {
-            background: linear-gradient(135deg, #f0f4ff 0%, #e6edff 100%);
-            padding: 30px;
-            border-radius: 16px;
-            margin: 30px 0;
-            border-left: 5px solid var(--primary);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .contact-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin-top: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
-        .contact-section h2 {
-            color: white;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 15px;
-            justify-content: center;
-        }
-
-        .contact-section h2 i {
-            color: white;
-        }
-
-        .email-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
             font-size: 1.1rem;
-            padding: 16px 35px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            border-radius: 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-            transition: var(--transition);
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
+            line-height: 1.8;
+            color: var(--gray);
         }
 
-        .email-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.6);
+        .content ul {
+            list-style: none;
+            margin: 20px 0;
         }
 
-        .acceptance-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 50px 0;
+        .content li {
             position: relative;
-            overflow: hidden;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--gray);
         }
 
-        .acceptance-section::before {
+        .content li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        /* Special Cards */
+        .intro-card {
+            background: linear-gradient(135deg, var(--glass-bg), rgba(255, 107, 53, 0.1));
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+
+        .intro-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.3;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 24px 24px 0 0;
         }
 
-        .acceptance-section h2 {
-            color: white;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            justify-content: center;
+        .definitions-card {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.05), var(--glass-bg));
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        /* Interactive Elements */
+        .interactive-section {
+            background: linear-gradient(135deg, var(--dark-secondary), var(--dark));
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            padding: 50px;
+            text-align: center;
             position: relative;
+            overflow: hidden;
+            margin: 60px 0;
         }
 
-        .acceptance-section h2 i {
-            color: white;
+        .interactive-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--primary), transparent);
+            animation: rotate 8s linear infinite;
+            z-index: -1;
         }
 
+        .interactive-section::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: var(--dark-secondary);
+            border-radius: 22px;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Checkbox Styling */
         .checkbox-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 30px 0;
-            flex-wrap: wrap;
-            position: relative;
+            margin: 40px 0;
         }
 
         .custom-checkbox {
@@ -300,364 +394,318 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 500;
-            max-width: 600px;
-            text-align: left;
-            transition: var(--transition);
-            position: relative;
-            padding: 15px 20px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
-        }
-
-        .checkbox-label:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        .checkmark {
-            width: 28px;
-            height: 28px;
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            background: rgba(255, 255, 255, 0.1);
-            flex-shrink: 0;
-            position: relative;
-        }
-
-        .custom-checkbox:checked + .checkbox-label .checkmark {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: white;
-            transform: scale(1.1);
-        }
-
-        .custom-checkbox:checked + .checkbox-label .checkmark::after {
-            content: "✓";
-            color: var(--success);
-            font-size: 16px;
-            font-weight: bold;
-            animation: checkAnimation 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-
-        @keyframes checkAnimation {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .acceptance-buttons {
-            margin-top: 30px;
-            position: relative;
-        }
-
-        .confirm-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 16px 40px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            backdrop-filter: blur(5px);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .confirm-btn:enabled {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--success);
-            border-color: white;
-        }
-
-        .confirm-btn:enabled:hover {
-            background: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .confirm-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .acceptance-message {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--success);
-            padding: 25px;
-            border-radius: 16px;
-            margin-top: 25px;
-            transition: var(--transition);
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            padding: 25px 35px;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .acceptance-message.hidden {
-            opacity: 0;
-            transform: translateY(-20px);
-            display: none;
+        .checkbox-label:hover {
+            border-color: var(--primary);
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--glow);
         }
 
-        .acceptance-message.show {
+        .checkmark {
+            width: 35px;
+            height: 35px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background: var(--dark);
+        }
+
+        .custom-checkbox:checked + .checkbox-label .checkmark {
+            background: var(--primary);
+            animation: checkPulse 0.6s ease;
+        }
+
+        .custom-checkbox:checked + .checkbox-label .checkmark::after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        @keyframes checkPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Action Button */
+        .action-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .action-btn:disabled {
+            background: var(--glass-bg);
+            color: var(--gray);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .action-btn:not(:disabled):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--glow);
+        }
+
+        .action-btn:not(:disabled)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .action-btn:not(:disabled):hover::before {
+            left: 100%;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), var(--glass-bg));
+            border: 2px solid var(--success);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .success-message.show {
             opacity: 1;
             transform: translateY(0);
-            display: block;
-            animation: successShow 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-
-        @keyframes successShow {
-            0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
-            50% { transform: scale(1.05) translateY(-5px); opacity: 0.8; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
         }
 
         .success-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            font-size: 3rem;
+            color: var(--success);
+            animation: bounce 1s infinite;
             display: block;
-            animation: bounce 1.2s infinite;
+            margin-bottom: 15px;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-12px); }
-            60% { transform: translateY(-7px); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-8px); }
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .card {
-                padding: 30px;
-                margin: 10px 0;
-                border-radius: 20px;
-            }
-            
-            .logo {
-                font-size: 2.2rem;
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            h2 {
-                font-size: 1.3rem;
-            }
-            
-            .checkbox-label {
-                font-size: 1rem;
-                text-align: center;
-                flex-direction: column;
-                gap: 15px;
-                padding: 20px;
-            }
-            
-            .checkmark {
-                margin: 0 auto;
-            }
-            
-            .confirm-btn {
-                font-size: 1rem;
-                padding: 14px 30px;
-            }
-        }
-
-        .section {
-            margin: 35px 0;
-            transition: var(--transition);
-            padding: 20px;
-            border-radius: 16px;
-        }
-
-        .section:hover {
-            background: rgba(99, 102, 241, 0.03);
-            transform: translateY(-2px);
-        }
-
-        .definitions {
-            background: #f8f9ff;
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 5px solid var(--secondary);
-            margin: 20px 0;
-        }
-
-        .footer {
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 24px;
+            padding: 60px;
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            color: var(--gray);
-            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
         }
 
-        .scroll-indicator {
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: float 20s infinite linear;
+        }
+
+        .contact-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 25px;
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
             position: fixed;
             top: 0;
             left: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-            z-index: 1000;
-            transition: width 0.25s ease;
-            border-radius: 0 3px 3px 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 1001;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--primary);
         }
 
+        /* Back to Top */
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            color: white;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px var(--glow);
+            z-index: 1000;
             opacity: 0;
-            transform: translateY(20px);
-            visibility: hidden;
+            transform: translateY(100px);
         }
 
         .back-to-top.visible {
             opacity: 1;
             transform: translateY(0);
-            visibility: visible;
         }
 
         .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--glow);
         }
 
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: -1;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .glass-card {
+                padding: 25px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .section-number {
+                margin: 0 auto;
+            }
+            
+            .interactive-section {
+                padding: 30px;
+            }
+            
+            .checkbox-label {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 30px;
+            }
         }
 
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            top: -150px;
-            right: -150px;
-        }
-
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--secondary);
-            bottom: -100px;
-            left: -100px;
-        }
-
-        .reading-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            z-index: 1000;
-        }
-
-        .reading-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .section-highlight {
-            position: relative;
-        }
-
-        .section-highlight::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            border-radius: 2px;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .section-highlight.active::before {
-            opacity: 1;
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 60px;
+            color: var(--gray);
         }
     </style>
 </head>
 <body>
-    <div class="reading-progress">
-        <div class="reading-progress-bar" id="readingProgress"></div>
-    </div>
+    <div class="animated-bg"></div>
     
-    <div class="scroll-indicator" id="scrollIndicator"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <nav class="nav">
+        <div class="logo">
+            <i class="fas fa-music logo-icon"></i>
+            ORPHEO
+        </div>
+    </nav>
     
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </div>
     
     <div class="container">
-        <div class="card">
-            <div class="floating-shape shape-1"></div>
-            <div class="floating-shape shape-2"></div>
-            
-            <div class="header">
-                <div class="logo">
-                    <i class="fas fa-moon logo-icon"></i>
-                    Studio Tsukiyo
-                </div>
-                <div class="subtitle">Platforms</div>
-                <div class="last-update">
-                    <i class="fas fa-calendar-alt"></i> Última atualização: 20/06/2025
-                </div>
+        <div class="hero">
+            <h1 class="hero-title">Termos de Uso</h1>
+            <p class="hero-subtitle">ORPHEO Platforms - Inovação Digital</p>
+            <div class="hero-date">
+                <i class="fas fa-calendar-check"></i>
+                Última atualização: 20/06/2025
             </div>
+        </div>
 
-            <h1>Termos de Uso</h1>
-
-            <div class="intro">
-                <p><strong>Bem-vindo(a) à Studio Tsukiyo Platforms ("Plataforma").</strong> Estes Termos de Uso ("Termos") regem o acesso e a utilização de nossos serviços, produtos, conteúdos, funcionalidades e recursos disponibilizados por meio da Plataforma, de forma online ou offline.</p>
+        <div class="glass-card intro-card">
+            <div class="content">
+                <p><strong>Bem-vindo(a) à ORPHEO Platforms ("Plataforma").</strong> Estes Termos de Uso ("Termos") regem o acesso e a utilização de nossos serviços, produtos, conteúdos, funcionalidades e recursos disponibilizados por meio da Plataforma, de forma online ou offline.</p>
                 <p>Ao acessar ou utilizar a Plataforma, você reconhece que leu, entendeu e concorda em cumprir estes Termos. Caso não concorde, não utilize a Plataforma.</p>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-1">
-                <h2><i class="fas fa-book"></i> 1. Definições</h2>
-                <div class="definitions">
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">01</div>
+                <h2 class="section-title">Definições</h2>
+                <i class="fas fa-book section-icon"></i>
+            </div>
+            <div class="content">
+                <div class="glass-card definitions-card">
                     <p>Para fins destes Termos:</p>
                     <p><strong>Usuário:</strong> Pessoa física ou jurídica que acessa ou utiliza a Plataforma.</p>
                     <p><strong>Conteúdo:</strong> Inclui textos, imagens, áudios, vídeos, código, interfaces, marcas, logotipos e quaisquer outros materiais disponibilizados na Plataforma.</p>
                     <p><strong>Serviços:</strong> Funcionalidades, produtos digitais e recursos oferecidos pela Plataforma.</p>
                 </div>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-2">
-                <h2><i class="fas fa-user-check"></i> 2. Elegibilidade</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">02</div>
+                <h2 class="section-title">Elegibilidade</h2>
+                <i class="fas fa-user-check section-icon"></i>
+            </div>
+            <div class="content">
                 <p>Para utilizar a Plataforma, você deve:</p>
                 <ul>
                     <li>Ter, no mínimo, 13 anos de idade (ou a idade mínima exigida por lei em sua jurisdição);</li>
@@ -666,9 +714,15 @@
                 </ul>
                 <p>Se você estiver aceitando estes Termos em nome de uma empresa ou entidade, declara possuir poderes para vincular essa entidade a este acordo.</p>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-3">
-                <h2><i class="fas fa-laptop-code"></i> 3. Uso da Plataforma</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">03</div>
+                <h2 class="section-title">Uso da Plataforma</h2>
+                <i class="fas fa-laptop-code section-icon"></i>
+            </div>
+            <div class="content">
                 <p>O Usuário concorda em utilizar a Plataforma exclusivamente para fins legais e em conformidade com estes Termos. É vedado:</p>
                 <ul>
                     <li>Utilizar os Serviços de forma que viole direitos de terceiros, incluindo propriedade intelectual e privacidade;</li>
@@ -678,206 +732,278 @@
                 </ul>
                 <p>A violação destes Termos poderá resultar na suspensão ou encerramento imediato da conta do Usuário.</p>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-4">
-                <h2><i class="fas fa-user-shield"></i> 4. Conta e Segurança</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">04</div>
+                <h2 class="section-title">Conta e Segurança</h2>
+                <i class="fas fa-user-shield section-icon"></i>
+            </div>
+            <div class="content">
                 <ul>
                     <li>O Usuário é responsável por manter a confidencialidade de suas credenciais de acesso.</li>
                     <li>Todas as atividades realizadas sob sua conta são de sua exclusiva responsabilidade.</li>
                     <li>A Plataforma não se responsabiliza por acessos não autorizados resultantes de negligência do Usuário em proteger suas credenciais.</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-5">
-                <h2><i class="fas fa-copyright"></i> 5. Direitos de Propriedade Intelectual</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">05</div>
+                <h2 class="section-title">Direitos de Propriedade Intelectual</h2>
+                <i class="fas fa-copyright section-icon"></i>
+            </div>
+            <div class="content">
                 <ul>
-                    <li>Todo o Conteúdo disponibilizado pela Plataforma, incluindo software, design, textos, imagens, marcas e logotipos, é de propriedade exclusiva da Studio Tsukiyo Platforms ou de seus licenciadores.</li>
+                    <li>Todo o Conteúdo disponibilizado pela Plataforma, incluindo software, design, textos, imagens, marcas e logotipos, é de propriedade exclusiva da ORPHEO Platforms ou de seus licenciadores.</li>
                     <li>O Usuário recebe apenas uma licença limitada, pessoal, não exclusiva e intransferível para utilizar os Serviços, sem qualquer direito de sublicenciamento.</li>
                     <li>É proibida a reprodução, distribuição, modificação ou criação de obras derivadas sem autorização expressa por escrito.</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-6">
-                <h2><i class="fas fa-file-upload"></i> 6. Conteúdo do Usuário</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">06</div>
+                <h2 class="section-title">Conteúdo do Usuário</h2>
+                <i class="fas fa-file-upload section-icon"></i>
+            </div>
+            <div class="content">
                 <ul>
                     <li>O Usuário pode submeter conteúdo à Plataforma, desde que não viole estes Termos ou a legislação aplicável.</li>
-                    <li>Ao enviar conteúdo, o Usuário concede à Studio Tsukiyo Platforms uma licença mundial, gratuita, não exclusiva e transferível para usar, reproduzir, distribuir, exibir e adaptar tal conteúdo, exclusivamente para fins de operação, promoção e melhoria dos Serviços.</li>
+                    <li>Ao enviar conteúdo, o Usuário concede à ORPHEO Platforms uma licença mundial, gratuita, não exclusiva e transferível para usar, reproduzir, distribuir, exibir e adaptar tal conteúdo, exclusivamente para fins de operação, promoção e melhoria dos Serviços.</li>
                     <li>O Usuário declara possuir todos os direitos necessários para compartilhar o conteúdo enviado.</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-7">
-                <h2><i class="fas fa-shield-alt"></i> 7. Privacidade e Proteção de Dados</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">07</div>
+                <h2 class="section-title">Privacidade e Proteção de Dados</h2>
+                <i class="fas fa-shield-alt section-icon"></i>
+            </div>
+            <div class="content">
                 <p>O tratamento de dados pessoais é regido pela Política de Privacidade, parte integrante destes Termos. Ao utilizar nossos produtos, o Usuário consente com a coleta, uso e processamento de seus dados conforme descrito nesta Política.</p>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-8">
-                <h2><i class="fas fa-ban"></i> 8. Suspensão e Encerramento</h2>
-                <p>A Studio Tsukiyo Platforms poderá, a seu critério exclusivo e sem aviso prévio:</p>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2 class="section-title">Suspensão e Encerramento</h2>
+                <i class="fas fa-ban section-icon"></i>
+            </div>
+            <div class="content">
+                <p>A ORPHEO Platforms poderá, a seu critério exclusivo e sem aviso prévio:</p>
                 <ul>
                     <li>Suspender ou encerrar a conta do Usuário que viole estes Termos ou a lei aplicável;</li>
                     <li>Restringir o acesso a determinados Serviços;</li>
                     <li>Remover conteúdos considerados inadequados, ilegais ou em desacordo com as diretrizes da Plataforma.</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-9">
-                <h2><i class="fas fa-exclamation-triangle"></i> 9. Limitação de Responsabilidade</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">09</div>
+                <h2 class="section-title">Limitação de Responsabilidade</h2>
+                <i class="fas fa-exclamation-triangle section-icon"></i>
+            </div>
+            <div class="content">
                 <ul>
                     <li>A Plataforma é fornecida "no estado em que se encontra", sem garantias de disponibilidade, continuidade ou ausência de falhas.</li>
-                    <li>A Studio Tsukiyo Platforms não se responsabiliza por perdas, danos indiretos, lucros cessantes ou prejuízos decorrentes do uso ou da incapacidade de uso da Plataforma.</li>
+                    <li>A ORPHEO Platforms não se responsabiliza por perdas, danos indiretos, lucros cessantes ou prejuízos decorrentes do uso ou da incapacidade de uso da Plataforma.</li>
                     <li>O Usuário utiliza os Serviços sob sua própria conta e risco.</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-10">
-                <h2><i class="fas fa-sync-alt"></i> 10. Alterações nos Termos</h2>
-                <p>A Studio Tsukiyo Platforms poderá modificar estes Termos a qualquer momento. As alterações entrarão em vigor na data de publicação. O uso contínuo dos produtos após a atualização constitui aceitação das mudanças.</p>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">10</div>
+                <h2 class="section-title">Alterações nos Termos</h2>
+                <i class="fas fa-sync-alt section-icon"></i>
             </div>
+            <div class="content">
+                <p>A ORPHEO Platforms poderá modificar estes Termos a qualquer momento. As alterações entrarão em vigor na data de publicação. O uso contínuo dos produtos após a atualização constitui aceitação das mudanças.</p>
+            </div>
+        </div>
 
-            <div class="section section-highlight" id="section-11">
-                <h2><i class="fas fa-file-contract"></i> 11. Disposições Gerais</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">11</div>
+                <h2 class="section-title">Disposições Gerais</h2>
+                <i class="fas fa-file-contract section-icon"></i>
+            </div>
+            <div class="content">
                 <ul>
-                    <li>Estes Termos constituem o acordo integral entre o Usuário e a Studio Tsukiyo Platforms.</li>
+                    <li>Estes Termos constituem o acordo integral entre o Usuário e a ORPHEO Platforms.</li>
                     <li>Caso qualquer disposição destes Termos seja considerada inválida ou inexequível, as demais permanecerão em pleno vigor.</li>
                     <li>A falha em exigir o cumprimento de qualquer disposição não constitui renúncia de direito.</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="section section-highlight" id="section-12">
-                <h2><i class="fas fa-balance-scale"></i> 12. Legislação e Foro</h2>
+        <div class="glass-card">
+            <div class="section-header">
+                <div class="section-number">12</div>
+                <h2 class="section-title">Legislação e Foro</h2>
+                <i class="fas fa-balance-scale section-icon"></i>
+            </div>
+            <div class="content">
                 <ul>
                     <li>Estes Termos serão regidos e interpretados de acordo com as leis da jurisdição aplicável.</li>
                     <li>Fica eleito o foro da comarca de Vitória/ES, com exclusão de qualquer outro, por mais privilegiado que seja, para dirimir controvérsias decorrentes destes Termos.</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="acceptance-section">
-                <h2><i class="fas fa-check-circle"></i> Aceitar Termos de Uso</h2>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="acceptTerms" class="custom-checkbox">
-                    <label for="acceptTerms" class="checkbox-label">
-                        <span class="checkmark"></span>
-                        Eu li, compreendi e aceito todos os Termos de Uso da Studio Tsukiyo Platforms
-                    </label>
-                </div>
-                <div class="acceptance-buttons">
-                    <button id="confirmButton" class="confirm-btn" disabled>
-                        <i class="fas fa-check"></i> Confirmar Aceitação
-                    </button>
-                    <div id="acceptanceMessage" class="acceptance-message hidden">
-                        <span class="success-icon">🎉</span>
-                        <strong>Termos aceitos com sucesso!</strong>
-                        <p>Obrigado por aceitar nossos termos de uso. Data: <span id="acceptanceDate"></span></p>
-                    </div>
-                </div>
+        <div class="interactive-section">
+            <div class="section-header">
+                <div class="section-number">✓</div>
+                <h2 class="section-title">Aceitar Termos de Uso</h2>
+                <i class="fas fa-check-circle section-icon"></i>
             </div>
+            
+            <div class="checkbox-container">
+                <input type="checkbox" id="acceptTerms" class="custom-checkbox">
+                <label for="acceptTerms" class="checkbox-label">
+                    <span class="checkmark"></span>
+                    Eu li, compreendi e aceito todos os Termos de Uso da ORPHEO Platforms
+                </label>
+            </div>
+            
+            <button id="confirmButton" class="action-btn" disabled>
+                <i class="fas fa-rocket"></i> Confirmar Aceitação
+            </button>
+            
+            <div id="successMessage" class="success-message">
+                <span class="success-icon">🎉</span>
+                <h3>Termos aceitos com sucesso!</h3>
+                <p>Obrigado por aceitar nossos termos de uso.</p>
+                <p><strong>Data de aceitação:</strong> <span id="acceptanceDate"></span></p>
+            </div>
+        </div>
 
-            <div class="contact-section">
-                <h2><i class="fas fa-envelope"></i> Contato</h2>
-                <p>Em caso de dúvidas sobre estes termos ou políticas:</p>
-                <a href="mailto:sac.studiotsukiyo@outlook.com?subject=Dúvida sobre Termos de Uso - Studio Tsukiyo Platforms&body=Olá,%0D%0A%0D%0ATenho uma dúvida sobre os Termos de Uso da Studio Tsukiyo Platforms.%0D%0A%0D%0AMinha dúvida é:%0D%0A%0D%0A%0D%0AObrigado(a)!" class="email-link">
-                    <i class="fas fa-paper-plane"></i> Enviar E-mail
-                </a>
-            </div>
+        <div class="contact-section">
+            <h2 style="color: white; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 15px; margin-bottom: 25px;">
+                <i class="fas fa-envelope"></i> Contato
+            </h2>
+            <p style="color: white; font-size: 1.2rem; margin-bottom: 30px;">
+                Em caso de dúvidas sobre estes termos ou políticas, entre em contato conosco:
+            </p>
+            <a href="mailto:sac.orpheoplatforms@outlook.com?subject=Dúvida sobre Termos de Uso - ORPHEO Platforms&body=Olá,%0D%0A%0D%0ATenho uma dúvida sobre os Termos de Uso da ORPHEO Platforms.%0D%0A%0D%0AMinha dúvida é:%0D%0A%0D%0A%0D%0AObrigado(a)!" class="contact-btn">
+                <i class="fas fa-paper-plane"></i> Enviar E-mail
+            </a>
+        </div>
 
-            <div class="footer">
-                <p>&copy; 2025 Studio Tsukiyo Platforms. Todos os direitos reservados.</p>
-            </div>
+        <div class="footer">
+            <p>&copy; 2025 ORPHEO Platforms. Todos os direitos reservados.</p>
+            <p>Desenvolvido com 💻 e ☕</p>
         </div>
     </div>
 
     <script>
-        // Checkbox and acceptance functionality
-        const checkbox = document.getElementById('acceptTerms');
-        const confirmButton = document.getElementById('confirmButton');
-        const acceptanceMessage = document.getElementById('acceptanceMessage');
-        const acceptanceDateSpan = document.getElementById('acceptanceDate');
-
-        checkbox.addEventListener('change', function() {
-            confirmButton.disabled = !this.checked;
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
             
-            if (this.checked) {
-                confirmButton.style.animation = 'pulse 0.6s ease';
-            } else {
-                confirmButton.style.animation = 'none';
-                acceptanceMessage.classList.remove('show');
-                acceptanceMessage.classList.add('hidden');
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                particlesContainer.appendChild(particle);
             }
-        });
+        }
 
-        confirmButton.addEventListener('click', function() {
-            if (checkbox.checked) {
-                const now = new Date();
-                const dateString = now.toLocaleString('pt-BR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-                
-                acceptanceDateSpan.textContent = dateString;
-                acceptanceMessage.classList.remove('hidden');
-                acceptanceMessage.classList.add('show');
-                
-                // Store acceptance in memory (since localStorage is not allowed)
-                window.termsAccepted = {
-                    date: now.toISOString(),
-                    timestamp: now.getTime()
-                };
-                
-                // Scroll to the message
-                acceptanceMessage.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
-            }
-        });
-
-        // Add pulse animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-                100% { transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Scroll indicator
-        window.addEventListener('scroll', function() {
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / scrollHeight) * 100;
-            document.getElementById('scrollIndicator').style.width = scrolled + '%';
-            
-            // Reading progress
-            document.getElementById('readingProgress').style.width = scrolled + '%';
-            
-            // Back to top button
-            if (scrollTop > 500) {
-                document.getElementById('backToTop').classList.add('visible');
-            } else {
-                document.getElementById('backToTop').classList.remove('visible');
-            }
-            
-            // Section highlighting
-            const sections = document.querySelectorAll('.section-highlight');
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                
-                if (scrollTop >= sectionTop - 300 && scrollTop < sectionTop + sectionHeight - 100) {
-                    section.classList.add('active');
-                } else {
-                    section.classList.remove('active');
-                }
-            });
-        });
+        // Progress bar functionality
+        function updateProgressBar() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
 
         // Back to top functionality
+        function toggleBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        // Terms acceptance functionality
+        function initTermsAcceptance() {
+            const checkbox = document.getElementById('acceptTerms');
+            const confirmButton = document.getElementById('confirmButton');
+            const successMessage = document.getElementById('successMessage');
+            const acceptanceDate = document.getElementById('acceptanceDate');
+
+            checkbox.addEventListener('change', function() {
+                confirmButton.disabled = !this.checked;
+                
+                if (!this.checked) {
+                    successMessage.classList.remove('show');
+                }
+            });
+
+            confirmButton.addEventListener('click', function() {
+                if (checkbox.checked) {
+                    const now = new Date();
+                    const dateString = now.toLocaleString('pt-BR', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    acceptanceDate.textContent = dateString;
+                    successMessage.classList.add('show');
+                    
+                    // Store acceptance data in memory
+                    window.termsAccepted = {
+                        date: now.toISOString(),
+                        timestamp: now.getTime(),
+                        platform: 'ORPHEO Platforms'
+                    };
+                    
+                    // Smooth scroll to success message
+                    successMessage.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }
+            });
+        }
+
+        // Scroll animations
+        function handleScroll() {
+            updateProgressBar();
+            toggleBackToTop();
+            
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const cardVisible = cardTop < window.innerHeight - 100;
+                
+                if (cardVisible) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Back to top click handler
         document.getElementById('backToTop').addEventListener('click', function() {
             window.scrollTo({
                 top: 0,
@@ -885,9 +1011,48 @@
             });
         });
 
-        // Smooth scroll for anchor links
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initTermsAcceptance();
+            
+            // Initial card animation setup
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'all 0.6s ease';
+                card.style.transitionDelay = (index * 0.1) + 's';
+            });
+            
+            // Trigger initial animations
+            setTimeout(() => {
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+
+        // Scroll event listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Add hover effects to section numbers
+        document.querySelectorAll('.section-number').forEach(number => {
+            number.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(5deg)';
+                this.style.boxShadow = '0 10px 25px rgba(255, 107, 53, 0.5)';
+            });
+            
+            number.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Add smooth scrolling for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -896,20 +1061,6 @@
                         block: 'start'
                     });
                 }
-            });
-        });
-
-        // Add hover effects to sections
-        document.querySelectorAll('.section').forEach(section => {
-            section.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-                this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
-            });
-            
-            section.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = 'none';
             });
         });
     </script>
